@@ -8,4 +8,4 @@ user='BalanTudor-Cristian'
 email='balanache1234@gmail.com'
 
 git -c user.name=$user -c user.email=$email commit -m "new"
-git push
+git push --set-upstream origin balan
