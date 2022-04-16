@@ -1,9 +1,9 @@
-const Header = () =>{
+const Header = (...args) =>{
+    const [name, title] = args;
     const template = `
-    <header>
-        <h1>Our app</h1>
-        <p>This is boilerplace for a simple component</p>
-    </header>
+    <div id="${name}">
+        ${title}
+    </div>
     `;
     return template;
 }
