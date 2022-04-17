@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "rm -rf ./development && rm -rf .cache && parcel public/index.html --out-dir development -p 3000",
+    "dev": "rm -rf ./development && rm -rf .cache && parcel public/index.html public/extra/docs.html --out-dir development -p 3000",
     "build": "parcel build public/index.html --out-dir /var/www/html --public-url ./"
   },
   "keywords": [],
@@ -17,5 +17,8 @@
     "asss": "^1.0.1",
     "parcel-bundler": "^1.3.1",
     "sass": "^1.49.11"
+  },
+  "dependencies": {
+    "html5-qrcode": "^2.2.1"
   }
 }
