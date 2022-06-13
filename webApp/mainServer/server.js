@@ -19,7 +19,8 @@ function shouldSkipAuthorization(req)
         ], 
         GET: [
             '/',
-            '/favicon.ico'
+            '/favicon.ico',
+            '/documentation'
         ]
     }
     if (!publicAvailablePaths[req.method])
