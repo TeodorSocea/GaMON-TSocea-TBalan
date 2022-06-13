@@ -19,6 +19,7 @@
     "sass": "^1.49.11"
   },
   "dependencies": {
-    "html5-qrcode": "^2.2.1"
+    "html5-qrcode": "^2.2.1",
+    "nodemon": "^2.0.16"
   }
 }
