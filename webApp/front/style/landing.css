@@ -1,0 +1,12 @@
+body {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 100vh;
+  grid-template-areas: ". landingContainer .";
+}
+
+.landingContainer {
+  background-color: #000000;
+  padding: auto;
+  grid-area: landingContainer;
+}

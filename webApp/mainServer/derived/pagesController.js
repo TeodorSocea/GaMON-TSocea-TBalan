@@ -3,17 +3,45 @@ const Mime = require('../base/httpTypes.js')
 const fs = require('fs')
 const path = require('path');
 const { StatusCodes } = require('http-status-codes');
+const pageUtils = require('../base/pageUtils.js');
 var controller = new Controller();
+
+return404 = (res) => {
+    res.statusCode = 404;
+    res.write("Not found");
+    res.end();
+}
 
 controller.route("GET", "/", (req, res) => {
     console.log(req.currentUser);
     if (req.currentUser)
         return 
-    lazyLoadPage(res, './mainServer/pages/dummy.txt')
+    lazyLoadPage(res, path.join(pageUtils('.html'), 'landing.html'))
 });
 
 controller.route("GET", "/documentation", (req, res) => {
-    lazyLoadPage(res, './mainServer/pages/documentation.html')
+    lazyLoadPage(res, path.join(pageUtils('.html'), 'documentation.html'))
+});
+
+controller.route("GET", "*", (req, res) => {
+    let ext = path.parse(req.url).ext.toLowerCase();
+    if(ext === '.html') {
+        res.redirect(path.parse(req.url).name).end();
+        return;
+    }
+    if(!pageUtils(ext)) {
+        return404(res);
+        return;
+    }
+    fs.stat(path.join(pageUtils(ext), req.url), (err, stat) => {
+        if(!err) {
+            res.setHeader('content-type', Mime(ext));
+            fs.createReadStream(path.join(pageUtils(ext), req.url)).pipe(res);
+        }
+        else {
+            return404(res);
+        }
+    });
 });
 
 lazyLoadPage = async (res, pagePath) => {
@@ -30,9 +58,7 @@ lazyLoadPage = async (res, pagePath) => {
     }catch(err){
         console.log(err)
         if(err.code == 'ENOENT') {
-            res.statusCode = 404;
-            res.write("Not found");
-            res.end();
+            return404()
         }
         else {
             res.writeHead(500);

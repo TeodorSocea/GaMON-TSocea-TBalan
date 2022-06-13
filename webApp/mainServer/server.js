@@ -20,7 +20,9 @@ function shouldSkipAuthorization(req)
         GET: [
             '/',
             '/favicon.ico',
-            '/documentation'
+            '/documentation',
+            '/base.css',
+            '/landing.css'
         ]
     }
     if (!publicAvailablePaths[req.method])
