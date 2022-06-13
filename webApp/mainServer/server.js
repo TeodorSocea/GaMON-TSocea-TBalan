@@ -2,7 +2,7 @@ const http = require('http');
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 
-const controllers = [];
+const controllers = [require('./derived/pagesController.js')];
 
 function setCorsOrigin(res) {
     res.setHeader('Access-Control-Allow-Origin', 'localhost');
@@ -18,7 +18,8 @@ function shouldSkipAuthorization(req)
         POST: [
         ], 
         GET: [
-            '/'
+            '/',
+            '/favicon.ico'
         ]
     }
     if (!publicAvailablePaths[req.method])
