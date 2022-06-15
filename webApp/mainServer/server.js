@@ -22,7 +22,8 @@ function shouldSkipAuthorization(req)
             '/favicon.ico',
             '/documentation',
             '/base.css',
-            '/landing.css'
+            '/landing.css',
+            '/landing.js'
         ]
     }
     if (!publicAvailablePaths[req.method])

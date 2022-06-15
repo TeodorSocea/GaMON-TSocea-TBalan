@@ -16,7 +16,7 @@ controller.route("GET", "/", (req, res) => {
     console.log(req.currentUser);
     if (req.currentUser)
         return 
-    lazyLoadPage(res, path.join(pageUtils('.html'), 'landing.html'))
+    lazyLoadPage(res, path.join(pageUtils('.html'), 'landing.html'), ['<registerComponent></registerComponent>'], ['registerComponent.html'])
 });
 
 controller.route("GET", "/documentation", (req, res) => {
@@ -44,12 +44,21 @@ controller.route("GET", "*", (req, res) => {
     });
 });
 
-lazyLoadPage = async (res, pagePath) => {
+lazyLoadPage = async (res, pagePath, oldContent, replaceWith) => {
     try{
         let pageContentPromise = fs.promises.readFile(pagePath)
         let [pageContent] = await Promise.all([pageContentPromise])
         
         let content = pageContent.toString()
+        
+        for(let i = 0; i < replaceWith.length; ++i) {
+            let replaceWithPath = path.join(__dirname, '../pages/components', replaceWith[i]);
+
+            let replaceContentPromise = fs.promises.readFile(replaceWithPath);
+            let [newContent] = await Promise.all([replaceContentPromise]);
+
+            content = content.toString().replace(oldContent[i], newContent);
+        }
 
         res.setHeader('content-type', Mime('.html'));
         res.writeHead(200, { 'Content-Type': Mime('.html') });

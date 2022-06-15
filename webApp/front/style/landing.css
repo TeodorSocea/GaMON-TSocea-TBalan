@@ -1,12 +1,16 @@
-body {
+.wrapper {
   display: grid;
-  grid-template-columns: 20% 60% 20%;
-  grid-template-rows: 100vh;
-  grid-template-areas: ". landingContainer .";
+  grid-template-columns: auto minmax(auto, 60%) auto;
+  grid-template-areas:
+    ". . ."
+    ". landingContainer ."
+    ". . .";
+  grid-template-rows: 10vh 70vh 19vh;
 }
 
 .landingContainer {
-  background-color: #000000;
-  padding: auto;
+  background-color: #ffffff;
   grid-area: landingContainer;
+  border-radius: 25px;
+  box-shadow: 5px 5px 25px;
 }
