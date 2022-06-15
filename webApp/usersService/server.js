@@ -2,7 +2,7 @@ const http = require('http');
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 
-const controllers = [require('./derived/pagesController.js'), require('./derived/servicesController.js')];
+controllers = [require('./derived/usersController.js')]
 
 function setCorsOrigin(res) {
     res.setHeader('Access-Control-Allow-Origin', 'localhost');
@@ -19,12 +19,6 @@ function shouldSkipAuthorization(req)
             '/register'
         ], 
         GET: [
-            '/',
-            '/favicon.ico',
-            '/documentation',
-            '/base.css',
-            '/landing.css',
-            '/landing.js'
         ]
     }
     if (!publicAvailablePaths[req.method])
@@ -99,6 +93,11 @@ const addResponseFunctionality = (res) => {
         });
         return this;
     }
+    res.json = function(obj) {
+        this.setHeader('Content-Type', 'application/json');
+        this.write(JSON.stringify(obj, null, 4));
+        return this;
+    };
     return res;
 }
 
@@ -143,5 +142,5 @@ const server = http.createServer(function (req, res) {
     });
 });
 
-server.listen(8081);
-console.log('Server running at localhost:8081');
+server.listen(8082);
+console.log('Server running at localhost:8082');
