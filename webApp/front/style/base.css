@@ -10,3 +10,26 @@ body {
   margin: 0px;
   height: 100vh;
 }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 600px auto;
+  grid-template-areas:
+    ". . ."
+    ". container ."
+    ". . .";
+  grid-template-rows: 5vh 90vh auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-columns: auto 90vw auto;
+  }
+}
+
+.container {
+  background-color: #ffffff;
+  grid-area: container;
+  border-radius: 25px;
+  box-shadow: 5px 5px 25px;
+}
