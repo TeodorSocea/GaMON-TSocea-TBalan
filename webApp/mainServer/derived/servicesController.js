@@ -5,6 +5,10 @@ const services = [
         {
             method: 'POST',
             path: '/register'
+        },
+        {
+            method: 'POST',
+            path: '/login'
         }
     ]
 }
@@ -24,9 +28,10 @@ function remakePath(req)
     return url;
 }
 
+//Dynamically make routes 
 for (let service of services){
     for(let call of service.calls){
-        if(call.path == '/register'){
+        if(call.path == '/register' || call.path == '/login'){
             controller.route(call.method, call.path, async (req, res) => {
                 const url = service.url + remakePath(req);
                 let fetchRequest = {
@@ -41,7 +46,7 @@ for (let service of services){
                 if (response.ok)
                 {
                     console.log(responseBody);
-                    res.setHeader('Set-Cookie', 'token=' + JSON.parse(responseBody).token + `; HttpOnly;Secure;expires=Sat, 21 May 2022 07:28:00 GMT;Max-Age=9000000;Domain=localhost;Path=/;overwrite=true`);
+                    res.setHeader('Set-Cookie', 'token=' + JSON.parse(responseBody).token + `; HttpOnly;Secure;expires=Wed, 1 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/;overwrite=true`);
                     res.end();
                 }
                 else

@@ -16,7 +16,8 @@ function shouldSkipAuthorization(req)
 {
     const publicAvailablePaths = {
         POST: [
-            '/register'
+            '/register',
+            '/login'
         ], 
         GET: [
         ]

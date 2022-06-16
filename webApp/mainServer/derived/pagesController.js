@@ -15,12 +15,19 @@ return404 = (res) => {
 controller.route("GET", "/", (req, res) => {
     console.log(req.currentUser);
     if (req.currentUser)
-        return 
-    lazyLoadPage(res, path.join(pageUtils('.html'), 'landing.html'), ['<registerComponent></registerComponent>'], ['registerComponent.html'])
+        if(req.currentUser.isAdmin == 'true')
+            return res.redirect('/adminDashboard').end();
+        else
+            return res.redirect('/citizenDashboard').end();
+    lazyLoadPage(res, path.join(pageUtils('.html'), 'landing.html'), ['<registerComponent></registerComponent>', '<loginComponent></loginComponent>', '<switchComponent></switchComponent>'], ['registerComponent.html', 'loginComponent.html', 'switchComponent.html'])
 });
 
 controller.route("GET", "/documentation", (req, res) => {
-    lazyLoadPage(res, path.join(pageUtils('.html'), 'documentation.html'))
+    lazyLoadPage(res, path.join(pageUtils('.html'), 'documentation.html'), [], [])
+});
+
+controller.route("GET", "/citizenDashboard", (req, res) => {
+
 });
 
 controller.route("GET", "*", (req, res) => {

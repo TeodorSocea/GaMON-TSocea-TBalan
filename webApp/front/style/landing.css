@@ -1,11 +1,17 @@
 .wrapper {
   display: grid;
-  grid-template-columns: auto minmax(auto, 60%) auto;
+  grid-template-columns: auto 600px auto;
   grid-template-areas:
     ". . ."
     ". landingContainer ."
     ". . .";
-  grid-template-rows: 10vh 70vh 19vh;
+  grid-template-rows: 5vh 90vh auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-columns: auto 90vw auto;
+  }
 }
 
 .landingContainer {
@@ -13,4 +19,56 @@
   grid-area: landingContainer;
   border-radius: 25px;
   box-shadow: 5px 5px 25px;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  cursor: pointer;
+  user-select: none;
+  display: block;
+  margin-top: 2%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+img {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+label {
+  display: block;
+  width: 80%;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  display: block;
+  width: 80%;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  cursor: pointer;
+  background-color: #5bc590;
+  display: block;
+  width: 80%;
+  font-size: 1.5rem;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  opacity: 0.8;
 }

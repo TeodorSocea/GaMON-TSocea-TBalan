@@ -16,11 +16,13 @@ function shouldSkipAuthorization(req)
 {
     const publicAvailablePaths = {
         POST: [
-            '/register'
+            '/register',
+            '/login'
         ], 
         GET: [
             '/',
             '/favicon.ico',
+            '/logo.png',
             '/documentation',
             '/base.css',
             '/landing.css',
