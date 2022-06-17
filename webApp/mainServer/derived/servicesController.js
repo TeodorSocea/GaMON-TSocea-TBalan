@@ -18,6 +18,10 @@ const services = [
         {
             method: "GET",
             path: "/locations"
+        },
+        {
+            method: "GET",
+            path: "/location"
         }
     ]
   }
@@ -39,7 +43,7 @@ function remakePath(req) {
 //Dynamically make routes
 for (let service of services) {
   for (let call of service.calls) {
-    if (call.path == "/register" || call.path == "/login") {
+    if (call.path === "/register" || call.path === "/login") {
       controller.route(call.method, call.path, async (req, res) => {
         const url = service.url + remakePath(req);
         let fetchRequest = {
