@@ -124,8 +124,10 @@ const server = http.createServer(function (req, res) {
         }).on('end', () => {
             try
             {
-                if (req.method !== 'GET' && req.method !== 'DELETE' && body !== '') 
-                    req.body = JSON.parse(body);
+                if (req.method !== 'GET' && req.method !== 'DELETE' && body !== ''){
+                    console.log(body);
+                    req.body = JSON.parse(body);               
+                }
                 else
                     req.body = null;
 

@@ -46,7 +46,7 @@ async function getCloseLocations(){
   let result = await fetch(`http://localhost:8081/locations?lat=${lat}&long=${long}`).then((res) => res.json()).catch((err) => console.log(err));
   console.log(result);
   closeLocations = result;
-  let html = "<select title=\"locations\" id=\"locations\" onchange=\"getSpecificLocation()\">";
+  let html = "<label for=\"locations\">Close locations</label><select title=\"locations\" id=\"locations\" onchange=\"getSpecificLocation()\">";
   for(let i = 0; i < result.length; i++)
   {
     let res = result[i];
@@ -65,11 +65,39 @@ async function getSpecificLocation(){
     return;
   }
   let result = await fetch(`http://localhost:8081/location?id=${id}`).then(res => res.json()).catch(err => console.log(err));
+  trashTags = result;
+  console.log(trashTags);
   let html = "";
   for(let j = 0; j < result.length; j++){
     let res = result[j];
     html += `<label for=\"${res}\">${res}</label>\n<input type=\"number\" id=\"${res}\" name=\"${res}\" min=\"0\">\n`;
   }
   document.getElementById("trashTagSelector").innerHTML = html;
+  document.getElementById("commentField").innerHTML = "<label for=\"textArea\">Comments</label><textarea title=\"textArea\" id=\"textArea\"></textarea>";
   console.log(result);
+}
+
+async function submitTicket(){
+  let quantities = {};
+  for(let i = 0; i < trashTags.length; i++){
+    quantities[trashTags[i]] = document.getElementById(trashTags[i]).value;
+  }
+  console.log(quantities);
+  let comment = document.getElementById("textArea").value;
+  console.log(comment);
+  let i = document.getElementById("locations").value;
+  let id = closeLocations[i].id;
+  console.log(id);
+  request = {
+    method: "POST",
+    body: JSON.stringify({
+      quantities: quantities,
+      commment: comment,
+      id: id
+    })
+  };
+  let result = await fetch(`http://localhost:8081/ticketSubmit`, request);
+
+
+  console.log(request);
 }

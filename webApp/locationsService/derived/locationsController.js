@@ -35,7 +35,8 @@ controller.route("GET", "/location", (req, res) =>{
         "glass",
         "metal",
         "paper",
-        "organic"
+        "organic",
+        "plastic"
     ];
     res.json(locationTags).end();
 });
