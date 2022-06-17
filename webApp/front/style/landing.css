@@ -4,7 +4,6 @@
 
 a {
   cursor: pointer;
-  user-select: none;
   display: block;
   margin-top: 2%;
   text-align: center;

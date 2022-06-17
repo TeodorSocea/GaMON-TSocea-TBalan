@@ -2,7 +2,11 @@ async function doRegister() {
   let username = document.getElementById("registerUsername").value;
   let password = document.getElementById("registerPassword").value;
 
-  return await register(username, password);
+  var res = await register(username, password);
+
+  if (res === true) {
+    window.location.replace("/");
+  }
 }
 
 async function register(usrn, pass) {

@@ -64,6 +64,8 @@ controller.route("GET", "*", (req, res) => {
   fs.stat(path.join(pageUtils(ext), req.url), (err, stat) => {
     if (!err) {
       res.setHeader("content-type", Mime(ext));
+      if(ext !== ".png")
+        res.writeHead(200, { "Content-Type": Mime(ext) + "; charset=utf-8" });
       fs.createReadStream(path.join(pageUtils(ext), req.url)).pipe(res);
     } else {
       return404(res);
@@ -92,7 +94,7 @@ lazyLoadPage = async (res, pagePath, oldContent, replaceWith) => {
     }
 
     res.setHeader("content-type", Mime(".html"));
-    res.writeHead(200, { "Content-Type": Mime(".html") });
+    res.writeHead(200, { "Content-Type": Mime(".html") + "; charset=utf-8" });
     res.end(content, "utf-8");
   } catch (err) {
     console.log(err);

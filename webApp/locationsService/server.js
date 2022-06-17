@@ -2,7 +2,7 @@ const http = require('http');
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 
-const controllers = [require('./derived/servicesController.js'), require('./derived/pagesController.js') ];
+controllers = [require('./derived/locationsController.js')]
 
 function setCorsOrigin(res) {
     res.setHeader('Access-Control-Allow-Origin', 'localhost');
@@ -16,17 +16,8 @@ function shouldSkipAuthorization(req)
 {
     const publicAvailablePaths = {
         POST: [
-            '/register',
-            '/login'
         ], 
         GET: [
-            '/',
-            '/favicon.ico',
-            '/logo.png',
-            '/documentation',
-            '/base.css',
-            '/landing.css',
-            '/landing.js'
         ]
     }
     if (!publicAvailablePaths[req.method])
@@ -62,7 +53,7 @@ const addRequestFunctionality = (req) => {
         console.log(this.method, this.url);
         console.log(this.cookies.token)
         const token = this.cookies.token;
-        if (token === undefined || !token || token === '')
+        if (!token || token === '')
         {
             if (shouldSkipAuthorization(this))
                 return callback(null, null);
@@ -102,6 +93,11 @@ const addResponseFunctionality = (res) => {
         });
         return this;
     }
+    res.json = function(obj) {
+        this.setHeader('Content-Type', 'application/json');
+        this.write(JSON.stringify(obj, null, 4));
+        return this;
+    };
     return res;
 }
 
@@ -117,6 +113,7 @@ const server = http.createServer(function (req, res) {
         }
         req.currentUser = decoded;
         let body = '';
+        console.log("De aici")
         req.on('data', (chunk) => {
             body += chunk;
         }).on('error', (err) => {
@@ -146,5 +143,5 @@ const server = http.createServer(function (req, res) {
     });
 });
 
-server.listen(8081);
-console.log('Server running at localhost:8081');
+server.listen(8083);
+console.log('Server running at localhost:8083');

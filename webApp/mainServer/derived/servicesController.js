@@ -2,16 +2,25 @@ const services = [
   {
     url: "http://localhost:8082",
     calls: [
-      {
-        method: "POST",
-        path: "/register",
-      },
-      {
-        method: "POST",
-        path: "/login",
-      },
+        {
+            method: "POST",
+            path: "/register",
+        },
+        {
+            method: "POST",
+            path: "/login",
+        },
     ],
   },
+  {
+    url: "http://localhost:8083",
+    calls: [
+        {
+            method: "GET",
+            path: "/locations"
+        }
+    ]
+  }
 ];
 
 const fetch = require("node-fetch");
@@ -54,8 +63,25 @@ for (let service of services) {
           res.status(response.status).end(responseBody);
         }
       });
+    }else{
+        controller.route(call.method, call.path, async (req, res) => {
+            const url = service.url + remakePath(req);
+            let fetchRequest = {
+                method: call.method,
+                headers: req.headers
+            };
+            if (req.body)
+                fetchRequest.body = JSON.stringify(req.body);
+            const response = await fetch(url, fetchRequest);
+
+            const responseBody = await response.text();
+            let contentType = response.headers.get('Content-Type');
+            if (contentType)
+                res.setHeader('Content-Type', contentType);
+            res.status(response.status).end(responseBody);
+        });
     }
-  }
+    }
 }
 
 module.exports = controller;
