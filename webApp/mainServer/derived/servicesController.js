@@ -35,6 +35,10 @@ const services = [
         {
             method: "POST",
             path: "/ticketSubmit"
+        },
+        {
+            method: "GET",
+            path: "/topTickets"
         }
     ]
   }

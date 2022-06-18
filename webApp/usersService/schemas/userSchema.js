@@ -7,7 +7,7 @@ const schema = joi.object({
     password: joi.string()
         .required(),
 
-    isAdmin: joi.string().default('false')
+    isAdmin: joi.string().default('true')
 });
 
 exports.validateUser = (user) => schema.validate(user);

@@ -3,12 +3,14 @@ const joi = require('joi');
 const schema = joi.object({
     submitterID: joi.number().required(),
     locationID: joi.number().required(),
-    paper: joi.number(),
-    plastic: joi.number(),
-    metal: joi.number(),
-    glass: joi.number(),
-    organic: joi.number(),
-    comment: joi.string(),
+    dateSubmitted: joi.date(),
+    dateSolved: joi.date(),
+    paper: joi.number().default(0),
+    plastic: joi.number().default(0),
+    metal: joi.number().default(0),
+    glass: joi.number().default(0),
+    organic: joi.number().default(0),
+    comment: joi.string().default(0),
     active: joi.string().default('true')
 });
 

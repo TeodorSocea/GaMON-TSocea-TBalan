@@ -23,7 +23,82 @@ controller.route("POST", "/ticketSubmit", (req, res) => {
     const {error, value} = schemas.ticketSchema.validateTicket(ticket);
     if (error || ok === false)
         return res.status(StatusCodes.BAD_REQUEST).end(error.toString());
+
+    //db.addTicket(value);
     res.end();
+});
+
+controller.route("GET", "/topTickets", (req, res) =>{
+    let top = req.query.top;
+    //db.getTopTickets(top)
+    topTickets = [
+        {
+            submitterID : 0,
+            locationID : 0,
+            dateSubmitted: '2022-06-16',
+            dateSolved: '',
+            paper: 0,
+            plastic: 0,
+            metal: 1,
+            glass: 1,
+            organic:1,
+            comment: "please come pick up trash",
+            active: 'true'
+        },
+        {
+            submitterID : 1,
+            locationID : 1,
+            dateSubmitted: '2022-06-16',
+            dateSolved: '',
+            paper: 1,
+            plastic: 0,
+            metal: 0,
+            glass: 0,
+            organic:1,
+            comment: "angry >:(",
+            active: 'true'
+        },
+        {
+            submitterID : 2,
+            locationID : 2,
+            dateSubmitted: '2022-06-16',
+            dateSolved: '',
+            paper: 1,
+            plastic: 1,
+            metal: 1,
+            glass: 1,
+            organic:1,
+            comment: "I have all",
+            active: 'true'
+        },
+        {
+            submitterID : 1,
+            locationID : 1,
+            dateSubmitted: '2022-06-16',
+            dateSolved: '',
+            paper: 1,
+            plastic: 0,
+            metal: 0,
+            glass: 0,
+            organic:1,
+            comment: "angry >:(",
+            active: 'true'
+        },
+        {
+            submitterID : 1,
+            locationID : 1,
+            dateSubmitted: '2022-06-16',
+            dateSolved: '',
+            paper: 1,
+            plastic: 0,
+            metal: 0,
+            glass: 0,
+            organic:1,
+            comment: "angry >:(",
+            active: 'true'
+        }
+    ];
+    res.json(topTickets).end();
 });
 
 module.exports = controller;

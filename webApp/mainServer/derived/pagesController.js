@@ -53,6 +53,19 @@ controller.route("GET", "/citizenDashboard", (req, res) => {
   );
 });
 
+controller.route("GET", "/adminDashboard", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  lazyLoadPage(
+    res,
+    path.join(pageUtils(".html"), "adminDashboard.html"),
+    [],
+    []
+  );
+});
+
 controller.route("GET", "*", (req, res) => {
   let ext = path.parse(req.url).ext.toLowerCase();
   if (ext === ".html") {

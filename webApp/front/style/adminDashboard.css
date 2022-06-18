@@ -1,0 +1,140 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background: rgb(32, 191, 85);
+  background: linear-gradient(
+    63deg,
+    rgba(32, 191, 85, 1) 0%,
+    rgba(1, 186, 239, 1) 54%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  color: #000000;
+  margin: 0px;
+  height: 100vh;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 600px 600px auto;
+  gap: 1.5vh;
+  grid-template-areas:
+    ". . . ."
+    ". ticketStatistics trashStatistics ."
+    ". tickets tickets ."
+    ". . . .";
+  grid-template-rows: 2vh 60vh 30vh 2vh;
+}
+
+.container {
+  background-color: #ffffff;
+  grid-area: container;
+  border-radius: 25px;
+  box-shadow: 5px 5px 25px;
+}
+
+#ticketStatistics {
+  grid-area: ticketStatistics;
+}
+
+#trashStatistics {
+  grid-area: trashStatistics;
+}
+
+#tickets {
+  grid-area: tickets;
+  text-align: center;
+}
+
+/* hide scrollbar but allow scrolling */
+#tickets {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+#tickets::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+@media only screen and (max-width: 1200px) {
+  .wrapper {
+    grid-template-columns: auto 600px auto;
+    grid-template-areas:
+      ". . . "
+      ". ticketStatistics ."
+      ". trashStatistics ."
+      ". tickets ."
+      ". . .";
+    grid-template-rows: 2vh 60vh 60vh 60vh 2vh;
+  }
+  .ticket {
+    height: 12% !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    grid-template-columns: auto 90vw auto;
+    grid-template-areas:
+      ". . . "
+      ". ticketStatistics ."
+      ". trashStatistics ."
+      ". tickets ."
+      ". . .";
+    grid-template-rows: 2vh 60vh 60vh 60vh 2vh;
+  }
+}
+
+.ticket {
+  background-color: #23af5f;
+  height: 18%;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.ticket:hover {
+  opacity: 0.9;
+}
+
+.tags {
+  display: flex;
+}
+
+.tag {
+  background-color: #15caf6;
+  border-radius: 5px;
+  margin: 2px;
+  font-size: 150%;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.tag:hover {
+  opacity: 0.9;
+}
+
+.date {
+  background-color: #15caf6;
+  border-radius: 5px;
+  margin: 2px;
+  font-size: 150%;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  padding-left: 5px;
+  padding-right: 5px;
+}
