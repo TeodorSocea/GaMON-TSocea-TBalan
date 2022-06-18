@@ -52,6 +52,9 @@ async function getCloseLocations(){
     let res = result[i];
     console.log(res)
     html += `\n<option value=${i}>${res.str}</option>`;
+    if(res.str === "select a location")
+      continue;
+    var marker = L.marker([res.lat, res.long]).addTo(map);
   }
   html+="</select>";
   document.getElementById("locationSelector").innerHTML = html;
@@ -120,7 +123,7 @@ function closePopup(){
 function openPopupSuccess(){
   document.getElementById('statusImg').setAttribute("src", "checkmark.png"); 
   document.getElementById('statusTitle').innerHTML = "Success!";
-  document.getElementById('statusMessage').innerHTML = "Successfully ubmitted your ticket!";
+  document.getElementById('statusMessage').innerHTML = "Successfully submitted your ticket!";
   document.getElementById('popup').classList.add("openPopup");
   document.getElementById('statusButton').setAttribute("onclick", "closePopupSuccess()");
 }
@@ -132,3 +135,9 @@ function openPopupFailed(){
   document.getElementById('popup').classList.add("openPopup");
   document.getElementById('statusButton').setAttribute("onclick", "closePopup()");
 }
+
+async function logout(){
+  let result = await fetch("http://localhost:8081/logout", {method : "DELETE"});
+  window.location.replace("/");
+}
+

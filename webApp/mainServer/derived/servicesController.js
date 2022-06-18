@@ -10,6 +10,10 @@ const services = [
             method: "POST",
             path: "/login",
         },
+        {
+          method:"DELETE",
+          path: "/logout"
+        }
     ],
   },
   {
@@ -76,6 +80,28 @@ for (let service of services) {
           res.status(response.status).end(responseBody);
         }
       });
+    }else if(call.path === "/logout"){
+        controller.route(call.method, call.path, async (req, res) => {
+            const url = service.url + remakePath(req);
+            let fetchRequest = {
+                method: call.method,
+                headers: req.headers
+            };
+            if (req.body)
+                fetchRequest.body = JSON.stringify(req.body);
+
+            const response = await fetch(url, fetchRequest);
+            if (response.ok)
+            {
+                console.log('ok');
+                res.setHeader('Set-Cookie', `token=; HttpOnly;Secure;expires=Wed, 1 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/;overwrite=true`);
+                res.end();
+            }
+            else
+            {
+                res.status(response.status).end(responseBody);
+            }
+        });
     }else{
         controller.route(call.method, call.path, async (req, res) => {
             const url = service.url + remakePath(req);

@@ -13,11 +13,13 @@ return404 = (res) => {
 };
 
 controller.route("GET", "/", (req, res) => {
-  console.log(req.currentUser);
-  if (req.currentUser)
-    if (req.currentUser.isAdmin == "true")
+  
+  if (req.currentUser){
+    console.log(req.currentUser.isAdmin)
+    if (req.currentUser.isAdmin === 'true')
       return res.redirect("/adminDashboard").end();
     else return res.redirect("/citizenDashboard").end();
+  }
   lazyLoadPage(
     res,
     path.join(pageUtils(".html"), "landing.html"),
@@ -46,9 +48,8 @@ controller.route("GET", "/citizenDashboard", (req, res) => {
     [
       "<ticketSubmitComponent></ticketSubmitComponent>",
       "<popupComponenet></popupComponenet>",
-      "<navbarComponent></navbarComponent>",
     ],
-    ["ticketSubmitComponent.html", "popupComponent.html", "navbarComponent.html"]
+    ["ticketSubmitComponent.html", "popupComponent.html"]
   );
 });
 

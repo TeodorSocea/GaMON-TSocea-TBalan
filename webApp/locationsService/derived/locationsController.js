@@ -15,14 +15,14 @@ controller.route("GET", "/locations", (req, res) =>{
             {
                 id : 1,
                 str : "magura",
-                lat : 0,
-                long : 0
+                lat : 47.17,
+                long : 27.67
             },
             {
                 id : 2,
                 str: "pacurari",
-                lat : 0,
-                long : 0
+                lat : 47.07,
+                long : 27.67
             }
         ]
     res.json(closeLocations).end();

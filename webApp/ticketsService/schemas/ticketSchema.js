@@ -8,7 +8,8 @@ const schema = joi.object({
     metal: joi.number(),
     glass: joi.number(),
     organic: joi.number(),
-    comment: joi.string()
+    comment: joi.string(),
+    active: joi.string().default('true')
 });
 
 exports.validateTicket = (ticket) => schema.validate(ticket);
