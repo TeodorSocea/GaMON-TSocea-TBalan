@@ -1,1 +1,30 @@
-#map { height: 40%; }
+#map {
+  height: 40%;
+}
+
+#popup {
+  width: 35vh;
+  height: 35vh;
+  background-color: #ffffff;
+  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 5px 5px 25px;
+  z-index: 1000;
+  transition: transform 0.1s, top, 0.1s;
+  visibility: hidden;
+}
+
+.openPopup {
+  visibility: visible !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+#statusImg {
+  width: 35%;
+  margin-top: -18%;
+}

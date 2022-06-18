@@ -24,6 +24,15 @@ const services = [
             path: "/location"
         }
     ]
+  },
+  {
+    url: "http://localhost:8084",
+    calls:[
+        {
+            method: "POST",
+            path: "/ticketSubmit"
+        }
+    ]
   }
 ];
 

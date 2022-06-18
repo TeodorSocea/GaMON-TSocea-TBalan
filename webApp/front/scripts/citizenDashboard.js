@@ -62,6 +62,7 @@ async function getSpecificLocation(){
   let id = closeLocations[i].id;
   if(id === -1){
     document.getElementById("trashTagSelector").innerHTML = "";
+    document.getElementById("commentField").innerHTML = "";
     return;
   }
   let result = await fetch(`http://localhost:8081/location?id=${id}`).then(res => res.json()).catch(err => console.log(err));
@@ -78,26 +79,56 @@ async function getSpecificLocation(){
 }
 
 async function submitTicket(){
+  
+  let i = document.getElementById("locations").value;
+  let id = closeLocations[i].id;
+  if(id === -1){
+    openPopupFailed();
+    return;
+  }
+  let comment = document.getElementById("textArea").value;
   let quantities = {};
   for(let i = 0; i < trashTags.length; i++){
     quantities[trashTags[i]] = document.getElementById(trashTags[i]).value;
   }
-  console.log(quantities);
-  let comment = document.getElementById("textArea").value;
-  console.log(comment);
-  let i = document.getElementById("locations").value;
-  let id = closeLocations[i].id;
-  console.log(id);
+  
+  
   request = {
     method: "POST",
     body: JSON.stringify({
+      id: id,
       quantities: quantities,
-      commment: comment,
-      id: id
+      commment: comment
     })
   };
   let result = await fetch(`http://localhost:8081/ticketSubmit`, request);
+  if(result.status === 200){
+    openPopupSuccess();
+  }else{
+    openPopupFailed();
+  }
+}
 
+function closePopupSuccess(){
+  closePopup();
+  window.location.replace("/");
+}
+function closePopup(){
+  document.getElementById("popup").classList.remove("openPopup");
+}
 
-  console.log(request);
+function openPopupSuccess(){
+  document.getElementById('statusImg').setAttribute("src", "checkmark.png"); 
+  document.getElementById('statusTitle').innerHTML = "Success!";
+  document.getElementById('statusMessage').innerHTML = "Successfully ubmitted your ticket!";
+  document.getElementById('popup').classList.add("openPopup");
+  document.getElementById('statusButton').setAttribute("onclick", "closePopupSuccess()");
+}
+
+function openPopupFailed(){
+  document.getElementById('statusImg').setAttribute("src", "crossmark.png"); 
+  document.getElementById('statusTitle').innerHTML = "Failed!";
+  document.getElementById('statusMessage').innerHTML = "Failed to submit your ticket!";
+  document.getElementById('popup').classList.add("openPopup");
+  document.getElementById('statusButton').setAttribute("onclick", "closePopup()");
 }

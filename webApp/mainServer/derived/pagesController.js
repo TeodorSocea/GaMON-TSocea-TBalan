@@ -45,9 +45,10 @@ controller.route("GET", "/citizenDashboard", (req, res) => {
     path.join(pageUtils(".html"), "citizenDashboard.html"),
     [
       "<ticketSubmitComponent></ticketSubmitComponent>",
+      "<popupComponenet></popupComponenet>",
       "<navbarComponent></navbarComponent>",
     ],
-    ["ticketSubmitComponent.html", "navbarComponent.html"]
+    ["ticketSubmitComponent.html", "popupComponent.html", "navbarComponent.html"]
   );
 });
 
