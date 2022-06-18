@@ -73,8 +73,9 @@ for (let service of services) {
             "Set-Cookie",
             "token=" +
               JSON.parse(responseBody).token +
-              `; HttpOnly;Secure;expires=Wed, 1 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/;overwrite=true`
+              `; HttpOnly;Secure;expires=Wed, 01 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/`
           );
+          res.setHeader("Content-Type", "application/json;charset=\"utf-8\"");
           res.end();
         } else {
           res.status(response.status).end(responseBody);
@@ -94,7 +95,8 @@ for (let service of services) {
             if (response.ok)
             {
                 console.log('ok');
-                res.setHeader('Set-Cookie', `token=; HttpOnly;Secure;expires=Wed, 1 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/;overwrite=true`);
+                res.setHeader('Set-Cookie', `token=deleted;Secure;HttpOnly;expires=Thu, 01 Jan 1970 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/`);
+                res.setHeader("Content-Type", "application/json;charset=\"utf-8\"");
                 res.end();
             }
             else
@@ -116,7 +118,9 @@ for (let service of services) {
             const responseBody = await response.text();
             let contentType = response.headers.get('Content-Type');
             if (contentType)
-                res.setHeader('Content-Type', contentType);
+              res.setHeader('Content-Type', contentType + ";charset=\"utf-8\"");
+            else
+              res.setHeader('Content-Type', "text/plain;charset=\"utf-8\"");
             res.status(response.status).end(responseBody);
         });
     }
