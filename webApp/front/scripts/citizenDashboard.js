@@ -101,7 +101,7 @@ async function submitTicket(){
     body: JSON.stringify({
       id: id,
       quantities: quantities,
-      commment: comment
+      comment: comment
     })
   };
   let result = await fetch(`http://localhost:8081/ticketSubmit`, request);
@@ -114,7 +114,7 @@ async function submitTicket(){
 
 function closePopupSuccess(){
   closePopup();
-  window.location.replace("/");
+  window.location.replace("/citizenDashboard");
 }
 function closePopup(){
   document.getElementById("popup").classList.remove("openPopup");

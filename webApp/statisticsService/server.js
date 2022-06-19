@@ -2,7 +2,7 @@ const http = require('http');
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 
-controllers = [require('./derived/usersController.js')]
+controllers = [require('./derived/statisticsController.js')]
 
 function setCorsOrigin(res) {
     res.setHeader('Access-Control-Allow-Origin', 'localhost');
@@ -16,8 +16,6 @@ function shouldSkipAuthorization(req)
 {
     const publicAvailablePaths = {
         POST: [
-            '/register',
-            '/login'
         ], 
         GET: [
         ]
@@ -53,6 +51,7 @@ const addRequestFunctionality = (req) => {
 
     req.authorize = function(callback) {
         console.log(this.method, this.url);
+        console.log(this.cookies.token)
         const token = this.cookies.token;
         if (!token || token === '')
         {
@@ -129,7 +128,6 @@ const server = http.createServer(function (req, res) {
                 for(let i = 0; i < controllers.length; ++i) {
                     let controller = controllers[i];
                     if(controller.match(req)) {
-                        console.log("handling");
                         controller.handle(req, res);
                         break;
                     }
@@ -144,5 +142,5 @@ const server = http.createServer(function (req, res) {
     });
 });
 
-server.listen(8082);
-console.log('Server running at localhost:8082');
+server.listen(8085);
+console.log('Server running at localhost:8085');

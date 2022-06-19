@@ -13,10 +13,11 @@ function parseTickets(tickets){
     let output = [];
     for(let i = 0; i<tickets.length; i++){
         output.push({
-            submitterID: tickets[i].submitterID,
-            locationID: tickets[i].locationID,
-            dateSubmitted: tickets[i].dateSubmitted,
-            dateSolved: tickets[i].dateSolved,
+            ticketID: tickets[i].id,
+            submitterID: tickets[i].submitterid,
+            locationID: tickets[i].locationid,
+            dateSubmitted: tickets[i].datesubmitted,
+            dateSolved: tickets[i].datesolved,
             tags :{
                 paper: tickets[i].paper,
                 plastic: tickets[i].plastic,
@@ -37,7 +38,7 @@ async function getTopTickets(top){
     console.log(tickets);
     var html = "<h2>Latest tickets</h2>";
     for(let i=0; i < tickets.length; i++){
-        html += `<div class=\"ticket\" id=\"ticket${i}\"><div class=\"date\" id=\"date${i}\">${tickets[i].dateSubmitted}</div><div class=\"tags\">`;
+        html += `<div class=\"ticket\" id=\"ticket${tickets[i].ticketID}\"><div class=\"date\" id=\"date${tickets[i].ticketID}\">${tickets[i].dateSubmitted}</div><div class=\"tags\">`;
         let keys = Object.keys(tickets[i].tags);
         for(let j=0; j < keys.length; j++){
             if(tickets[i].tags[keys[j]] > 0){
@@ -48,4 +49,10 @@ async function getTopTickets(top){
         html += "</div></div>";
     }
     document.getElementById("tickets").innerHTML = html;
+}
+
+async function ticketsChart(){
+    let chart = document.getElementById('ticketsChart').getCotext('2d');
+    let response = await fetch(`http://localhost:8081/ticketsChart`);
+    let ticketsChart = new Chart(chart, chartData);
 }

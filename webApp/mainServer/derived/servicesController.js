@@ -11,8 +11,8 @@ const services = [
             path: "/login",
         },
         {
-          method:"DELETE",
-          path: "/logout"
+            method:"DELETE",
+            path: "/logout"
         }
     ],
   },
