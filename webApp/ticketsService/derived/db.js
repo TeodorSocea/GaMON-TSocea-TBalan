@@ -43,3 +43,26 @@ exports.getTopTickets = async (top, callback) => {
         callback(null, results);
     });
 }
+
+exports.getAllTickets = async (callback) => {
+    pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where active=\'true\' ORDER BY datesubmitted DESC',
+    (err, results) => {
+        console.log(err);
+        console.log(results);
+        if (err)
+            return callback(err);
+        callback(null, results);   
+    });
+}
+
+exports.getTicketById = async (ticketid, callback) => {
+    pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where id=$1',
+    [ticketid],
+    (err, results) => {
+        if(err){
+            console.log(err);
+            return callback(err);
+        }
+        callback(null, results);
+    });
+}

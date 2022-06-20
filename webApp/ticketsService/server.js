@@ -51,7 +51,6 @@ const addRequestFunctionality = (req) => {
 
     req.authorize = function(callback) {
         console.log(this.method, this.url);
-        console.log(this.cookies.token)
         const token = this.cookies.token;
         if (!token || token === '')
         {

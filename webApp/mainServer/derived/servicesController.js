@@ -26,6 +26,10 @@ const services = [
         {
             method: "GET",
             path: "/location"
+        },
+        {
+            method: "GET",
+            path: "/api/locations/location"
         }
     ]
   },
@@ -39,7 +43,28 @@ const services = [
         {
             method: "GET",
             path: "/topTickets"
+        },
+        {
+            method: "GET",
+            path: "/allTickets"
+        },
+        {
+            method: "GET",
+            path: "api/tickets/ticket"
         }
+    ]
+  },
+  {
+    url: "http://localhost:8085",
+    calls: [
+      {
+        method: "GET",
+        path: "ticketsChart"
+      },
+      {
+        method: "GET",
+        path: "api/statistics/ticket"
+      }
     ]
   }
 ];
@@ -71,13 +96,14 @@ for (let service of services) {
 
         const response = await fetch(url, fetchRequest);
         const responseBody = await response.text();
+        console.log("Got a token", JSON.parse(responseBody).token);
         if (response.ok) {
           console.log(responseBody);
           res.setHeader(
             "Set-Cookie",
             "token=" +
               JSON.parse(responseBody).token +
-              `; HttpOnly;Secure;expires=Wed, 01 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;Path=/`
+              `; HttpOnly;Secure;expires=Wed, 01 Nov 2023 00:00:00 GMT;Max-Age=9000000;Domain=localhost;`
           );
           res.setHeader("Content-Type", "application/json;charset=\"utf-8\"");
           res.end();
@@ -118,8 +144,8 @@ for (let service of services) {
             if (req.body)
                 fetchRequest.body = JSON.stringify(req.body);
             const response = await fetch(url, fetchRequest);
-
             const responseBody = await response.text();
+            console.log(responseBody);
             let contentType = response.headers.get('Content-Type');
             if (contentType)
               res.setHeader('Content-Type', contentType + ";charset=\"utf-8\"");

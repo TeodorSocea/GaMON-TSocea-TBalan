@@ -26,11 +26,13 @@ controller.route("POST", "/ticketSubmit", (req, res) => {
                 }
             }
             const {error, value} = schemas.ticketSchema.validateTicket(ticket);
+            console.log(error, value);
             if (error || ok === false)
                 return res.status(StatusCodes.BAD_REQUEST).end(error.toString());
 
             db.createTicket(value, (err, results) => {
                 if(err){
+                    console.log(err)
                     res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(err.toString());
                 }
             });
@@ -48,11 +50,28 @@ controller.route("GET", "/topTickets", (req, res) =>{
         results = results.rows;
 
         for(let i = 0; i < results.length; i++){
-           results[i].datesubmitted = results[i].datesubmitted.toISOString().split('T')[0] + " " + results[i].datesubmitted.toISOString().split('T')[1].split('.')[0];
+           results[i].datesubmitted = results[i].datesubmitted.toISOString().split('T')[0];
         }
         console.log(JSON.stringify(results));
         res.json(results).end();
     }); 
+});
+
+controller.route("GET", "/allTickets", (req, res) => {
+    db.getAllTickets((err, results) => {
+        if(err){
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(err.toString());
+        }
+        results = results.rows;
+        res.json(results).end();
+    });
+});
+
+controller.route("GET", "api/tickets/ticket", (req, res) => {
+    db.getTicketById(req.query.ticketid, (err, results) => {
+        results = results.rows[0];
+        res.json(results).end();
+    });
 });
 
 module.exports = controller;

@@ -1,6 +1,7 @@
 const Controller = require('../base/baseController.js');
 const { StatusCodes } = require('http-status-codes');
 const Mime = require('../base/httpTypes.js');
+const db = require('./db.js');
 var controller = new Controller();
 
 controller.route("GET", "/locations", (req, res) =>{
@@ -39,6 +40,18 @@ controller.route("GET", "/location", (req, res) =>{
         "plastic"
     ];
     res.json(locationTags).end();
+});
+
+controller.route("GET", "/api/locations/location", (req, res) => {
+    let id = req.query.locationid;
+    console.log(id);
+    db.getLocationById(id, (err, results) => {
+        if(results.rows.length === 0){
+            return res.json({}).end();
+        }
+        results = results.rows[0];
+        return res.json(results).end();
+    });
 });
 
 module.exports = controller;

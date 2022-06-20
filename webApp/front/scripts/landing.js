@@ -5,7 +5,7 @@ async function doRegister() {
   var res = await register(username, password);
 
   if (res === true) {
-    window.location.replace("/");
+    window.location.assign("/");
   }
 }
 
@@ -30,7 +30,7 @@ async function doLogin() {
   var res = await login(username, password);
 
   if (res === true) {
-    window.location.replace("/");
+    window.location.assign("/");
   }
 }
 

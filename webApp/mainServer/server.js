@@ -47,6 +47,7 @@ function shouldSkipAuthorization(req)
 
 const addRequestFunctionality = (req) => {
     req.cookies = {};
+    console.log(req.headers);
     if (req.headers && req.headers.cookie)
     {
         const cookies = req.headers.cookie.split(';');
@@ -60,7 +61,8 @@ const addRequestFunctionality = (req) => {
 
     req.authorize = function(callback) {
         console.log(this.method, this.url);
-        console.log(this.cookies.token)
+        console.log(this.cookies);
+        console.log("this is the token", this.cookies.token);
         const token = this.cookies.token;
         if (token === undefined || !token || token === '')
         {

@@ -9,10 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
     <title>GaMON</title>
   </head>
-  <body onload="getTopTickets(6)">
+  <body onload="getTopTickets(6); ticketsChart()">
     <div class="wrapper">
-      <div class="container" id="ticketStatistics"></div>
-      <canvas id="ticketsChart"></canvas>
+      <div class="container" id="ticketStatistics">
+        <h2>Ticket Summary for the Past Week</h2>
+        <canvas id="ticketsChart"></canvas>
+      </div>
       <div class="container" id="trashStatistics">
         <button type="button" onclick="logout()" id="logoutButton">
           Logout

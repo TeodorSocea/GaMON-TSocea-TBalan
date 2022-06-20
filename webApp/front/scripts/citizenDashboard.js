@@ -17,8 +17,6 @@ async function load(){
 function initMap() {
   return new Promise( (resolve, reject)  => {
     navigator.geolocation.getCurrentPosition((pos) => {
-      document.getElementById("coords").innerHTML =
-        pos.coords.latitude + " " + pos.coords.longitude;
       var coordinates = [pos.coords.latitude, pos.coords.longitude];
       globalCoords[0] = coordinates[0];
       globalCoords[1] = coordinates[1];
@@ -46,7 +44,7 @@ async function getCloseLocations(){
   let result = await fetch(`http://localhost:8081/locations?lat=${lat}&long=${long}`).then((res) => res.json()).catch((err) => console.log(err));
   console.log(result);
   closeLocations = result;
-  let html = "<label for=\"locations\">Close locations</label><select title=\"locations\" id=\"locations\" onchange=\"getSpecificLocation()\">";
+  let html = "<label for=\"locations\">Close locations</label><br><select title=\"locations\" id=\"locations\" onchange=\"getSpecificLocation()\">";
   for(let i = 0; i < result.length; i++)
   {
     let res = result[i];
@@ -74,7 +72,7 @@ async function getSpecificLocation(){
   let html = "";
   for(let j = 0; j < result.length; j++){
     let res = result[j];
-    html += `<label for=\"${res}\">${res}</label>\n<input type=\"number\" id=\"${res}\" name=\"${res}\" min=\"0\">\n`;
+    html += `<div class=\"tag\"><label for=\"${res}\">${res}</label><input type=\"number\" id=\"${res}\" name=\"${res}\" min=\"0\"></div>`;
   }
   document.getElementById("trashTagSelector").innerHTML = html;
   document.getElementById("commentField").innerHTML = "<label for=\"textArea\">Comments</label><textarea title=\"textArea\" id=\"textArea\"></textarea>";
@@ -114,7 +112,7 @@ async function submitTicket(){
 
 function closePopupSuccess(){
   closePopup();
-  window.location.replace("/citizenDashboard");
+  window.location.assign("/citizenDashboard");
 }
 function closePopup(){
   document.getElementById("popup").classList.remove("openPopup");
@@ -138,6 +136,6 @@ function openPopupFailed(){
 
 async function logout(){
   let result = await fetch("http://localhost:8081/logout", {method : "DELETE"});
-  window.location.replace("/");
+  window.location.assign("/");
 }
 

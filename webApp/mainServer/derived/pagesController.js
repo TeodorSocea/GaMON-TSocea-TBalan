@@ -66,6 +66,21 @@ controller.route("GET", "/adminDashboard", (req, res) => {
   );
 });
 
+controller.route("GET", "/ticket", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  if(req.query.ticketid === undefined || req.query.ticketid === '')
+    return res.redirect("/").end();
+  dynamicGeneratePage(
+    res,
+    path.join(pageUtils(".html"), "ticket.html"),
+    ["<body>"],
+    [`<body onload=\"grabTicket(${req.query.ticketid})\">`]
+  );
+});
+
 controller.route("GET", "*", (req, res) => {
   let ext = path.parse(req.url).ext.toLowerCase();
   if (ext === ".html") {
@@ -87,6 +102,31 @@ controller.route("GET", "*", (req, res) => {
     }
   });
 });
+
+dynamicGeneratePage = async (res, pagePath, oldContent, replaceWith) =>{
+  try {
+    let pageContentPromise = fs.promises.readFile(pagePath);
+    let [pageContent] = await Promise.all([pageContentPromise]);
+
+    let content = pageContent.toString();
+
+    for (let i = 0; i < replaceWith.length; ++i) {
+      content = content.toString().replace(oldContent[i], replaceWith[i]);
+    }
+
+    res.setHeader("content-type", Mime(".html"));
+    res.writeHead(200, { "Content-Type": Mime(".html") + "; charset=utf-8" });
+    res.end(content, "utf-8");
+  } catch (err) {
+    console.log(err);
+    if (err.code == "ENOENT") {
+      return404();
+    } else {
+      res.writeHead(500);
+      res.end("Internal server error: " + err.code + "\n");
+    }
+  }
+}
 
 lazyLoadPage = async (res, pagePath, oldContent, replaceWith) => {
   try {
@@ -120,6 +160,6 @@ lazyLoadPage = async (res, pagePath, oldContent, replaceWith) => {
       res.end("Internal server error: " + err.code + "\n");
     }
   }
-};
+}
 
 module.exports = controller;

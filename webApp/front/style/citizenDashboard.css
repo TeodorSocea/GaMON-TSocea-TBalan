@@ -1,3 +1,7 @@
+* {
+  text-align: center;
+}
+
 #map {
   height: 40%;
 }
@@ -27,4 +31,62 @@
 #statusImg {
   width: 35%;
   margin-top: -18%;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+select {
+  display: block;
+  width: 80%;
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  width: 80%;
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  display: block;
+  width: 80%;
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  cursor: pointer;
+  background-color: #5bc590;
+  display: block;
+  width: 80%;
+  font-size: 1.2rem;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+textarea {
+  width: 80%;
+  height: 12vh;
+}
+
+.tag {
+  width: 80%;
+}
+
+#trashTagSelector {
+  display: flex;
 }

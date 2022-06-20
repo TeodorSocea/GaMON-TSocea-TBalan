@@ -1,0 +1,28 @@
+#map {
+  height: 40%;
+}
+
+* {
+  text-align: center;
+}
+
+.container {
+  overflow-y: auto;
+}
+
+canvas {
+  margin: 20px;
+}
+
+#map {
+  margin: 20px;
+}
+
+#comment {
+  background-color: #f2f2f2;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px;
+}
