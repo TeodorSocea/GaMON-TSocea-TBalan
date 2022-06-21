@@ -1,0 +1,79 @@
+body {
+  width: 50%;
+  padding: 0 25%;
+}
+
+p {
+  font-size: 1.2em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding-left: 50px;
+}
+
+h1 {
+  color: #000;
+  font-size: 3rem;
+  text-align: center;
+  font-family: RockoFLF, sans-serif;
+}
+
+h2 {
+  padding-top: 50px;
+  font-size: 2rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding-left: 25px;
+}
+
+ul {
+  font-size: 1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding-left: 100px;
+}
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+ol > li {
+  display: table;
+  counter-increment: item;
+  margin-bottom: 0.6em;
+}
+
+ol > li::before {
+  content: counters(item, ".") ". ";
+  display: table-cell;
+  padding-right: 0.6em;
+}
+
+li ol > li {
+  margin: 0;
+}
+
+li ol > li::before {
+  content: counters(item, ".") " ";
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+img {
+  width: 100%;
+  margin-top: 20px;
+}
+
+figcaption {
+  text-align: center;
+  font-family: RockoFLF, sans-serif;
+  font-weight: bold;
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="indexStyle.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> GaMON Report </title>
+</head>
+<body prefix="schema: http://schema.org/">
+    <article typeof="schema:ScholarlyArticle">
+        <header>
+            <a href="documentation.html"><h1> <strong>GaMON</strong> </h1></a>
+        </header>
+        <section role="doc-toc">
+            <h2>
+                Table of contents
+            </h2>
+            <ol>
+                <li> 
+                    <a href="#introduction"> Introduction </a>
+                    <ol>
+                        <li> <a href="#purpose"> Purpose </a> </li>
+                        <li> <a href="#audience"> Intended audience </a> </li>
+                    </ol>
+                </li>
+                <li> 
+                    <a href="#description"> Overall description </a>
+                    <ol>
+                        <li> <a href="#functions"> Product functions </a> </li>
+                        <li> <a href="#user-types"> Types of users  </a> </li>
+                        <li> <a href="#operating-environment"> Operating environment </a> </li>
+                    </ol>
+                </li>
+                <li> 
+                    <a href="#frontend-structure"> Frontend Structure </a>
+                    <ol>
+                        <li> <a href="#f-technologies"> Technologies </a> </li>
+                        <li> 
+                            <a href="#f-pages"> Pages </a> 
+                            <ol>
+                                <li> <a href="#f-landing"> Landing Page </a> </li>
+                                <li> <a href="#f-citizen"> Citizen Dashboard </a> </li>
+                                <li> <a href="#f-admin"> Admin Dashboard </a> </li>
+                                <li> <a href="#f-locations"> Locations Page </a> </li>
+                                <li> <a href="#f-tickets"> Tickets Page </a> </li>
+                                <li> <a href="#f-location"> Location Page </a> </li>
+                                <li> <a href="#f-ticket"> Ticket Page </a> </li>
+                                <li> <a href="#f-addLocation"> Add Location Page </a> </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li> 
+                    <a href="#backend-structure"> Backend Structure </a>
+                    <ol>
+                        <li> <a href="#b-technologies"> Technologies </a> </li>
+                        <li> 
+                            <a href="#b-microservices"> Microservices </a> 
+                            <ol>
+                                
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li> 
+                    <a href="#communication"> Communication </a>
+                    <ol>
+                        <li> <a href="#">  </a> </li>
+                    </ol>
+                </li>
+                <li> 
+                    <a href="#tasks"> Tasks </a>
+                    <ol>
+                        <li> <a href="#teo"> Socea Teodor </a> </li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+        <section role="doc-introduction" id="introduction">
+            <h2> 1. Introduction </h2>
+            
+            <section role="doc-purpose" id="purpose">
+                <h3> 1.1. Purpose </h3>
+                <p>
+                    As cities grow it is becoming increasingly difficult for authorities to manage garbage collection and disposal to a satisfying degree.
+                    This is why we created <strong>GaMON</strong>. GaMON is a tool for citizens to help with reporting garbage sightings and for administrators to view those tickets and act on them. 
+                </p>
+            </section>
+
+            <section role="doc-audience" id="audience">
+                <h3> 1.2 Intended audience </h3> 
+                <p>
+                    All citizens who have access to the internet can help by creating an account and submitting tickets for when they are disposing of trash in designated locations.
+                    The admin however is the target user, as he has the most power over the application and the applications serves the best purpose to the administrator.
+                </p>
+            </section>
+        </section>
+
+        <section role="doc-description" id="description">
+            <h2> 2. Overall description </h2>
+
+            <section role="doc-functions" id="functions">
+                <h3> 2.1 Product functions </h3>
+                <p>
+                    <strong>GaMON</strong>'s main features are:
+                    <ul>
+                        <li> Creating an account and logging in </li>
+                        <li> Generating tickets submitted by the citizens </li>
+                        <li> Displaying statistics related to how many tickets are active and how many have been solved </li>
+                        <li> Displaying recent tickets </li>
+                        <li> Displating statistics related to the amount of garbage collected </li>
+                        <li> Viewing locations designated for storing garbage </li>
+                        <li> Adding new locations designated for the depositation of garbage </li>
+                        <li> Generating CSV and JSON documents containing reports related to locations and tickets </li>
+                    </ul>
+                </p>
+            </section>
+
+            <section role="doc-types-of-users" id="user-types">
+                <h3> 2.2 Types of users </h3>
+                <p>
+                    <strong>GaMON</strong> allows the existence of two types of users:
+                    <ul>
+                        <li> Regular users who can view nearby locations on the map, and submit tickets </li>
+                        <li> Admin users who can view reports, add locations and resolve ticktes </li>
+                    </ul>
+                </p>
+            </section>
+
+            <section role="doc-operating-environment" id="operating-environment">
+                <h3> 2.3 Operating environment </h3>
+                <p>
+                    The application will run in a browser, on both descktop and mobile platforms, on Windows, Linux, Android, iOS.
+                </p>
+            </section>
+        </section>
+
+        <section role="doc-frontend-structure" id="frontend-structure">
+            <h2> 3. Frontend Structure </h2>
+
+            <section role="doc-f-technologies" id="f-technologies">
+                <h3> 3.1 Technologies </h3>
+                    <p>
+                        For the frontend part of the project we used HTML5, CSS3 and JavaScript with a few JavaScript libraries such as Leaflet.js and Chart.js.
+                    </p>
+            </section>
+
+            <section role="doc-f-pages" id="f-pages">
+                <h3> 3.2 Pages </h3>
+
+                <img src="pageFlow.png">
+                
+                <section role="doc-f-landing" id="f-landing">
+                    <h4> Landing Page </h4>
+                    <p>
+                        This is the first page that the user will see. Here they can choose to create an account or log in with an already existing one.
+                        After creating an account or logging in, the user is redirected to their specific dashboard.
+                    </p>
+                </section>
+
+                <section role="doc-f-citizen" id="f-citizen">
+                    <h4> Citizen Dashboard </h4>
+                    <p>
+                        After logging in, the refular user will be redirected to the citizen dashboard page. Here they will see a map of the general area with markers reprezenting nearby garbage depositation locations.
+                        Selecting one of the close locations, the user will be prezented with input fields, reprezenting the quantity of trash the citizen wants to report, coresponding to its respective label.
+                    </p>
+                </section>
+
+                <section role="doc-f-admin" id="f-admin">
+                    <h4> Admin Dashboard </h4>
+                    <p>
+                        After logging in, the admin user will be redirected to the admin dashboard page. Here they can view a ticket summary for the past week, trash summary, representig the amount of different types of garbage that has been collected, and the latest unresolved tickets.
+                    </p>
+                </section>
+
+                <section role="doc-f-locations" id="f-locations">
+                    <h4> Locations Page </h4>
+                    <p>
+                        In this page the administrator can view the locations currently active where garbage can be deposited and collected.
+                        The admin can also export a report of all locations and the garbage collected from them in csv format, as well as add new locations, or disable and enable existing ones.    
+                    </p>
+                </section>
+
+                <section role="doc-f-tickets" id="f-tickets">
+                    <h4> Tickets Page </h4>
+                    <p>
+                        On this page the administrator can view all active tickets, both resolved and unresolved.
+                        The admin can export a report of all tickets in csv or json format, as well as mark tickets as resolved, or deactivate them.
+                    </p>
+                </section>
+
+                <section role="doc-f-location" id="f-location">
+                    <h4> Location Page </h4>
+                    <p>
+                        On this page, that is accessed by clicking one of the entries on the locations page, the admin can see the location on the map and a chart representing the amount of garbage reported and collected in that area.
+                        This is where the admin can deactivate or activate the location.
+                    </p>
+                </section>
+
+                <section role="doc-f-ticket" id="f-ticket">
+                    <h4> Ticket Page </h4>
+                    <p>
+                        On this page, that is accessed by clicking one of the entries on the locations page, or on one of the latest tickets, the admin can see the map of where the ticket was place, details about the amount of garbage reported and a comment submitted by the citizen.
+                        The admin can mark the ticket as resolved. If the ticket is resolved, the admin can deactivate the ticket, removing it from other reports.  
+                    </p>
+                </section>
+
+                <section role="doc-f-addLocation" id="f-addLocation">
+                    <h4> Add Location Page </h4>
+                    <p>
+                        On this page, that is accessed through the locations page, the admin can add a new location to available locations for depositation. 
+                        The admin can select a point on the map, check which type of trash ca be collected on that site and give it a name, afterwards, it can be submitted.
+                    </p>
+                </section>
+
+            </section>
+        </section>
+        <section role="doc-backend-structure" id="backend-structure">
+            <h2> 4. Backend Structure </h2>
+
+            <section role="doc-b-technologies" id="b-technologies">
+                <h3> 4.1 Technologies </h3>
+                    <p>
+                        For the backend part of the project we used 
+                        <ul>
+                            <li> <strong> NodeJS </strong> was used to implement most features of the main server and microservices. </li>
+                            <li> <strong> PostgreSQL </strong> was used as the database server. We chose to use relational databases due to their performant search. </li>
+                            <li> <strong> JWT </strong> was used for authentication. </li>
+                        </ul>
+                    </p>
+            </section>
+
+            <section role="doc-b-microservices" id="b-microservices">
+                <h3> 4.2 Microservices </h3>
+                <img src="microservices.png">
+                <p>
+                    We structured our project around 4 microservices and a main server. This approach bring many advantages over structuring the application as a monolith, mainly the ability to scale easily 
+                    and reduced impact of outages, as the other microservices continue to work as expected, even if one fails. Our services are:
+                    <ul>
+                        <li> The main server - acts as a gateway for the microservices and handles static file retrieval </li>
+                        <li> The users microservice - handles authentication and authorization, user CRUD operations and admin operations </li>
+                        <li> The statistics microservice - handles the retrieval and calculation of statistics and creation of charts based on them </li>
+                        <li> The locations microservice - handles CRUD operations on locations </li>
+                        <li> The tickets microservice - handles CRUD operations on tickets </li>
+                    </ul>
+                </p>
+                <h4> Main server </h4>
+                <p>
+                    When a request first arrives to the main server, it has to be authorized. The JWT in the cookies is checked and the request is not solved if the token
+                    is not valid and the request is for a non-public resource. Then, if the request is for a static file, it is served, otherwise it is redirected to the
+                    microservice that will hadle the request.
+                </p>
+                <h4> Users microservice </h4>
+                <p>
+                    This service is responsible for the administration of user data. It handles account creation and login for users, generating the token on a successful login.
+                </p>
+                <h4> Statistics microservice </h4>
+                <p>
+                    This is the microservice that communicates with the most other microservices. The statistics microservice receives requests for certain reports and requests from the other microservices informatiton in order to compose a response.
+                </p>
+                <h4> Locations microservice </h4>
+                <p>
+                    This is the microservice that handles CRUD operations on locations.
+                </p>
+                <h4> Tickets microservice </h4>
+                <p>
+                    This is the microservice that handles CRUD operations on tickets.
+                </p>
+            </section>
+        </section>
+        <section role="doc-communication" id="communication">
+            <h2> 5. Communication </h2>
+            <p>
+                Client-server communication is mainly done through HTTP requests to the internal API and public REST services. Requests pass through the main server that either serves a static file, or forwards
+                the request to the matching microservice and sends back the response after it is received from the microservice. 
+                Pages are dynamically built throgh AJAX calls to the server based on query parameters and user input.
+            </p>
+        </section>
+        <section role="doc-tasks" id="tasks">
+            <h2> 6. Tasks </h2>
+            <section role="doc-teo" id="teo">
+                <h3> Socea Teodor </h3>
+                <p>
+                    <ul>
+                        <li> JWT based authentication </li>
+                        <li> Database setup </li>
+                        <li> Organizing the project as microservices </li>
+                        <li> Admin functionality </li>
+                        <li> Admin page </li>
+                        <li> Security </li>
+                        <li> Utility functions for easier usage of requests and responses </li>
+                        <li> Statistics API </li>
+                        <li> Locations API </li>
+                        <li> Preliminary MVC structuring of the server </li>
+                        <li> Citizen functionality </li>
+                        <li> Parts based backend rendering of the HTML pages </li>
+                        <li> Login and Register </li>
+                        <li> Users API </li>
+                        <li> Tickets API</li>
+                    </ul>
+                </p>
+            </section>
+        </section>
+    </article>
+</body>
+</html>

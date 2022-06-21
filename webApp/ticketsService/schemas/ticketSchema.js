@@ -10,7 +10,7 @@ const schema = joi.object({
     metal: joi.number().default(0),
     glass: joi.number().default(0),
     organic: joi.number().default(0),
-    comment: joi.string().alphanum(),
+    comment: joi.string().pattern(new RegExp('^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$')),
     active: joi.string().default('true')
 });
 

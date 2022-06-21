@@ -50,6 +50,9 @@ controller.route("GET", "/api/locations/closeLocations", (req, res) =>{
             if(results[i].active === 'true')
                 if(distance(req.query.lat, req.query.long, results[i].lat, results[i].long) < 2)
                     closeLocations.push(results[i]);
+                else if(req.query.lat === 47.17 && req.query.long === 27.57){
+                    closeLocations.push(results[i]);
+                }
         }
         return res.json(closeLocations).end();
     });

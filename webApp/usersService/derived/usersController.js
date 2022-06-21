@@ -20,7 +20,7 @@ controller.route("POST", "/register", (req, res) => {
                 res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(err.toString());
             }
             else {
-                const token = jwt.sign({username: value.username, isAdmin: value.isadmin}, 'secret', {expiresIn: 24*60*60});
+                const token = jwt.sign({username: value.username, isAdmin: value.isAdmin}, 'secret', {expiresIn: 24*60*60});
                 res.json({token: token}).end();
             }
         }

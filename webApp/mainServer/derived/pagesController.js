@@ -32,15 +32,6 @@ controller.route("GET", "/", (req, res) => {
   );
 });
 
-controller.route("GET", "/documentation", (req, res) => {
-  lazyLoadPage(
-    res,
-    path.join(pageUtils(".html"), "documentation.html"),
-    [],
-    []
-  );
-});
-
 controller.route("GET", "/citizenDashboard", (req, res) => {
   lazyLoadPage(
     res,

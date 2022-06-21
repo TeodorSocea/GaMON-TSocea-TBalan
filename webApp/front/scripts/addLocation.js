@@ -69,7 +69,7 @@ document.getElementById("popup").classList.remove("openPopup");
 function openPopupSuccess(){
 document.getElementById('statusImg').setAttribute("src", "../checkmark.png"); 
 document.getElementById('statusTitle').innerHTML = "Success!";
-document.getElementById('statusMessage').innerHTML = "Successfully submitted your ticket!";
+document.getElementById('statusMessage').innerHTML = "Successfully added your location!";
 document.getElementById('popup').classList.add("openPopup");
 document.getElementById('statusButton').setAttribute("onclick", "closePopupSuccess()");
 }

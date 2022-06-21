@@ -23,12 +23,11 @@ function shouldSkipAuthorization(req)
             '/',
             '/favicon.ico',
             '/logo.png',
-            '/documentation',
             '/base.css',
             '/landing.css',
             '/landing.js',
             '/checkmark.png',
-            '/crossmark.png'
+            '/crossmark.png',
         ]
     }
     if (!publicAvailablePaths[req.method])
@@ -49,7 +48,6 @@ function shouldSkipAuthorization(req)
 
 const addRequestFunctionality = (req) => {
     req.cookies = {};
-    console.log(req.headers);
     if (req.headers && req.headers.cookie)
     {
         const cookies = req.headers.cookie.split(';');
@@ -111,8 +109,8 @@ const server = http.createServer(function (req, res) {
     res = addResponseFunctionality(res);
 
     req.authorize((err, decoded) => {
+        console.log(err, req.url);
         if (err) {
-
             res.redirect('/').end();
             return;
         }

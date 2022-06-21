@@ -74,6 +74,7 @@ async function getSpecificLocation(){
   }
   document.getElementById("trashTagSelector").innerHTML = html;
   document.getElementById("commentField").innerHTML = "<label for=\"textArea\">Comments</label><textarea title=\"textArea\" id=\"textArea\"></textarea>";
+  map.setView([closeLocations[i].lat, closeLocations[i].long], 15);
   console.log(result);
 }
 

@@ -9,7 +9,8 @@ const pool = new Pool({
 })
 
 exports.createUser = async (user, callback) =>{
-    pool.query('insert into users(username, password, isAdmin) values ($1, $2, $3)', [user.username, user.password, user.isAdmin], (err, results) => {
+    console.log(user.isAdmin);
+    pool.query('insert into users(username, password, isadmin) values ($1, $2, $3)', [user.username, user.password, user.isAdmin], (err, results) => {
         console.log(err);
         console.log(results);
         if (err)

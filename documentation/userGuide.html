@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Garbage Web Monitor - User Manual</title>
+  <link rel="stylesheet" href="indexStyle.css">
+  <meta name="authors" content="Socea Teodor">
+  <meta name="project" content="Garbage Web Monitor">
+</head>
+<body prefix="schema: http://schema.org/">
+  <article resource="#" typeof="schema:ScholarlyArticle">
+    <header>
+      <a href="documentation.html"><h1> <strong>GaMON</strong> </h1></a>
+  </header>
+  </article>
+<h1>User Guide</h1>
+
+
+<p>In this section we will discuss how the user interacts with the project <abbr title="Garbage Web Monitor">GaMON</abbr>.</p>
+
+<h2>User Interaction Pages</h2>
+
+<p>This applications is meant to collect tickets from citizens and provide information to the administartors, related to those tickets</p>
+
+<p>The user is meant to access the link of the application:</p>
+<ul>
+  
+    <li class = "magnify-text"><a href="#login page">Login/Register Page</a> </li>
+    <li class = "magnify-text"><a href="#citizen Dashboard">Citizen Dashboard</a> </li>
+    <li class = "magnify-text"><a href="#admin Dashboard">Admin Dashboard</a></li>
+    <li class = "magnify-text"><a href="#locations page">Locations Page</a></li>
+    <li class = "magnify-text"><a href="#tickets page">Tickets Page</a> </li>
+    <li class = "magnify-text"><a href="#location page">Location Page </a></li>
+    <li class = "magnify-text"><a href="#ticket page">Ticket Page</a> </li>
+    <li class = "magnify-text"><a href="#add location page">Add Location Page </a> </li>
+
+</ul>
+
+<h2><a name="login page"> Login / Register Page</a></h2>
+
+<p>
+    The application requires the user to login to an existing account or to create one on the spot.
+</p>
+
+<p>
+    After the login / register process, the user will be redirected to their respective dashboard.
+</p>
+<p>
+<img src="login.PNG" alt="loginPage" class="center">
+</p>
+
+<h2><a name="citizen Dashboard"> Citizen Dashboard </a></h2>
+<p>
+  The Citizen Dashboard has the following features:
+</p>
+<ul>
+  <li>
+    Map of surrounding area with markers representing close garbage disposal areas.
+  </li>
+  <li>
+    Selector for close garbage disposal areas.
+  </li>
+  <li>
+    Inputs for garbage type and quantity.
+  </li>
+  <li>
+    Text field reserved for citizen comments.
+  </li>
+  <li>
+    Submit button to submit the ticket.
+  </li>
+  <li>
+    Logout button to log out.
+  </li>
+</ul>
+<p>
+<img src="citizenDashboard.png" alt="citizenDashboard" class="center">
+</p>
+
+<h2><a name="admin Dashboard"> Admin Dashboard </a> </h2>
+
+<p>
+  The admin has access to a summary of different information the application collects, such as recent tickets, ticket status and trash status.  
+</p>
+<p>
+<img src="adminDashboard.png" alt="settingsPage" class="center">
+</p>
+
+
+<h2><a name="locations page"> Locations Page</a></h2>
+
+<p>
+  After clicking the View Locations button, the administrator is presented with the locations page.
+</p>
+<p>
+  Here the administrator can view all registered locations and add new ones by clicking Add New Location.  
+</p>
+<p>
+  The administrator can also download in CSV format a report of all locations and the trash accumulated there by clicking Export Locations.
+</p>
+
+<p>
+<img src="locations.PNG" alt="locationsPage" class="center">
+</p>
+
+<h2><a name="tickets page"> Tickets Page</a></h2>
+
+<p>
+  After clicking the View Tickets button, the administrator is presented with the tickets page.  
+</p>
+<p>
+  Here the administartor can view all active tickets, solved and unresolved.  
+</p>
+<p>
+  The administartor can also download in CSV or JSON format, reports of all active tickets.  
+</p>
+
+<p>
+<img src="tickets.png" alt="subredditPage" class="center">
+</p>
+
+<h2><a name="location page"> Location Page</h2>
+
+<p>
+  By clicking any of the locations present on the Locations Page, the administrator will be presented with the Location Page.  
+</p>
+<p>
+  Here the administartor can view the coordinates of the location on the map, and view statistics about the trash accumulated there.  
+</p>
+<p>
+  The administrator can also activate and deactivate the location by pressing the button.
+</p>
+<p>
+<img src="location.png" alt="settingsPage" class="center">
+</p>
+
+<h2><a name="ticket page"> Ticket Page</h2>
+
+<p>
+  By clicking any of the tickets present on the Tickets Page, the administrator will be presented with the Ticket Page.  
+</p>
+<p>
+  Here the administrator can view on the map, the location where the ticket was palced, quantities of trash reported at that location, and a comment.
+</p>
+<p>
+  The administrator can also mark the ticket as solver, or deactivate it to ignore its presence in reports.
+</p>
+<p>
+<img src="ticket.PNG" alt="adminPage" class="center">
+</p>
+
+<h2><a name="add location page"> Add Location Page</h2>
+
+  <p>
+    By clicking the Add New Location button on the locations page, the administrator will be presented with the Add Location Page.  
+  </p>
+  <p>
+    Here the administrator can add a new location, by selecting a place on the map, toggling the types of trash can be deposited there, and giving the location a name.  
+  </p>
+  <p>
+    After that is done, the administrator can press Add Location.
+  </p>
+  <p>
+  <img src="addlocation.PNG" alt="adminPage" class="center">
+  </p>
+
+
+
+
+</body>
+</html>
