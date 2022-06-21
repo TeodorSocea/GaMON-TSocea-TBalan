@@ -22,7 +22,6 @@ function initMap() {
       globalCoords[1] = coordinates[1];
       console.log(globalCoords);
       map.setView(coordinates, 15);
-      var marker = L.marker(coordinates).addTo(map);
       resolve(1);
     }, (error) => {
       console.log(error);
@@ -30,7 +29,6 @@ function initMap() {
       globalCoords[0] = coordinates[0];
       globalCoords[1] = coordinates[1];
       map.setView(coordinates, 15);
-      var marker = L.marker(coordinates).addTo(map);
       resolve(1);
     });
   });
@@ -41,7 +39,7 @@ async function getCloseLocations(){
   let lat = globalCoords[0];
   let long = globalCoords[1];
   console.log(lat, long);
-  let result = await fetch(`http://localhost:8081/locations?lat=${lat}&long=${long}`).then((res) => res.json()).catch((err) => console.log(err));
+  let result = await fetch(`http://localhost:8081/api/locations/closeLocations?lat=${lat}&long=${long}`).then((res) => res.json()).catch((err) => console.log(err));
   console.log(result);
   closeLocations = result;
   let html = "<label for=\"locations\">Close locations</label><br><select title=\"locations\" id=\"locations\" onchange=\"getSpecificLocation()\">";
@@ -52,7 +50,7 @@ async function getCloseLocations(){
     html += `\n<option value=${i}>${res.str}</option>`;
     if(res.str === "select a location")
       continue;
-    var marker = L.marker([res.lat, res.long]).addTo(map);
+    var marker = L.marker([res.lat, res.long]).addTo(map).bindPopup(res.str);
   }
   html+="</select>";
   document.getElementById("locationSelector").innerHTML = html;
@@ -66,7 +64,7 @@ async function getSpecificLocation(){
     document.getElementById("commentField").innerHTML = "";
     return;
   }
-  let result = await fetch(`http://localhost:8081/location?id=${id}`).then(res => res.json()).catch(err => console.log(err));
+  let result = closeLocations[i].tags;
   trashTags = result;
   console.log(trashTags);
   let html = "";
@@ -102,6 +100,9 @@ async function submitTicket(){
       comment: comment
     })
   };
+
+  console.log(request);
+
   let result = await fetch(`http://localhost:8081/ticketSubmit`, request);
   if(result.status === 200){
     openPopupSuccess();

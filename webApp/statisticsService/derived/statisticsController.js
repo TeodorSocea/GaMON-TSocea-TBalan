@@ -99,7 +99,7 @@ controller.route("GET", "/trashChart", async (req, res) => {
     res.json(chart).end();
 });
 
-controller.route("GET", "api/statistics/ticket" , async (req, res) => {
+controller.route("GET", "/api/statistics/ticket" , async (req, res) => {
     let ticket = await fetch(`http://localhost:8081/api/tickets/ticket?ticketid=${req.query.ticketid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
     let location = await fetch(`http://localhost:8081/api/locations/location?locationid=${ticket.locationid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
 
@@ -118,5 +118,42 @@ controller.route("GET", "api/statistics/ticket" , async (req, res) => {
     }
     res.json(chart).end();
 });
+
+controller.route("GET", "/api/statistics/location", async (req, res) => {   
+    let tickets = await fetch(`http://localhost:8081/api/tickets/tickets?locationid=${req.query.locationid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
+    let loc = await fetch(`http://localhost:8081/api/locations/location?locationid=${req.query.locationid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
+    
+    location = {
+        paper: 0,
+        plastic: 0,
+        metal: 0,
+        glass: 0,
+        organic: 0
+    }
+
+    for(let i = 0; i < tickets.length; i++){
+        location.paper += tickets[i].paper;
+        location.plastic += tickets[i].plastic;
+        location.metal += tickets[i].metal;
+        location.glass += tickets[i].glass;
+        location.organic += tickets[i].organic;
+    }
+
+    let chart = {
+        type: 'bar',
+        data: {
+            labels: ['Paper', 'Plastic', 'Metal', 'Glass', 'Oraganic'],
+            datasets: [{
+                label: loc.str,
+                data: Object.values(location),
+                backgroundColor: '#e46436',
+                borderColor: '#ff893c'
+            }]
+        },
+        options: {}
+    }
+    
+    res.json(chart).end();
+})
 
 module.exports = controller;

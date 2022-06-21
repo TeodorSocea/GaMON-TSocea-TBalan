@@ -18,8 +18,8 @@ exports.getLocationById = (locationid, callback) => {
     })
 }
 
-exports.getAllLocations = (callback) => {
-    pool.query('select str, lat, long, active, tags from locations',
+exports.getAllLocations = async (callback) => {
+    pool.query('select id, str, lat, long, active, tags from locations ORDER BY ID DESC',
     (err, results) => {
         callback(null, results);
     }
@@ -37,4 +37,12 @@ exports.addLocation = (location, callback) => {
         callback(null, results);
     }
     )
+}
+
+exports.updateLocation = (locationid, value, callback) => {
+    pool.query('update locations set active = $1 where id = $2',
+    [value, locationid],
+    (error, results) =>{
+        callback(null, results);
+    });
 }

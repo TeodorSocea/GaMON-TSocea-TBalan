@@ -1,7 +1,6 @@
 async function load(){
     let html = "<button id=\"addLocation\" type=\"button\" onclick=\"addLocation()\">Add Location</button>";
     html += "<button id=\"exportLocations\" type=\"button\" onclick=\"exportLocations()\">Export Locations</button>";
-    html += "<button id=\"importLocations\" type=\"button\" onclick=\"importLocations()\">Import Locations</button>"
     document.getElementById("buttons").innerHTML = html;
 
     locations = await fetch(`http://localhost:8081/api/locations/allLocations`).then(result => result.json());
@@ -27,4 +26,12 @@ async function load(){
 
 function addLocation(){
     window.location.assign("/locationsList/addLocation");
+}
+
+function viewLocation(locationid){
+    window.location.assign(`/locationsList/location?locationid=${locationid}`);
+}
+
+async function exportLocations(){
+    window.location.assign(`/api/locations/export`);
 }

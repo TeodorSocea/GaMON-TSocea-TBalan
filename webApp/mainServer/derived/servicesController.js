@@ -21,7 +21,7 @@ const services = [
     calls: [
         {
             method: "GET",
-            path: "/locations"
+            path: "/api/locations/closeLocations"
         },
         {
             method: "GET",
@@ -38,6 +38,14 @@ const services = [
         {
             method: "POST",
             path: "/api/locations/addLocation"
+        },
+        {
+            method: "PUT",
+            path: "/api/locations/updateLocation"
+        },
+        {
+            method: "GET",
+            path: "/api/locations/export"
         }
     ]
   },
@@ -54,7 +62,7 @@ const services = [
         },
         {
             method: "GET",
-            path: "api/tickets/ticket"
+            path: "/api/tickets/ticket"
         },
         {
            method: "PUT",
@@ -67,6 +75,10 @@ const services = [
         {
           method: "GET",
           path: "/api/tickets/solvedTickets"
+        },
+        {
+          method: "GET",
+          path: "/api/tickets/tickets"
         }
     ]
   },
@@ -75,15 +87,19 @@ const services = [
     calls: [
       {
         method: "GET",
-        path: "ticketsChart"
+        path: "/ticketsChart"
       },
       {
         method: "GET",
-        path: "trashChart"
+        path: "/trashChart"
       },
       {
         method: "GET",
-        path: "api/statistics/ticket"
+        path: "/api/statistics/ticket"
+      },
+      {
+        method: "GET",
+        path: "/api/statistics/location"
       }
     ]
   }
@@ -165,10 +181,13 @@ for (let service of services) {
                 fetchRequest.body = JSON.stringify(req.body);
             const response = await fetch(url, fetchRequest);
             const responseBody = await response.text();
-            console.log(responseBody);
             let contentType = response.headers.get('Content-Type');
-            if (contentType)
+            console.log(contentType);
+            if (contentType){
               res.setHeader('Content-Type', contentType + ";charset=\"utf-8\"");
+              if(contentType === 'application/octet-stream');
+              res.setHeader('Content-Disposition', 'attachement; filename=locations.csv');
+            }
             else
               res.setHeader('Content-Type', "text/plain;charset=\"utf-8\"");
             res.status(response.status).end(responseBody);

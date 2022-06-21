@@ -107,6 +107,19 @@ controller.route("GET", "/locationsList/addLocation", (req, res) => {
   );
 });
 
+controller.route("GET", "/locationsList/location", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  dynamicGeneratePage(
+      res,
+      path.join(pageUtils(".html"), "location.html"),
+      ["<body>"],
+      [`<body onload=\"grabLocation(${req.query.locationid})\">`]
+  );
+});
+
 controller.route("GET", "*", (req, res) => {
   let ext = path.parse(req.url).ext.toLowerCase();
   if (ext === ".html") {

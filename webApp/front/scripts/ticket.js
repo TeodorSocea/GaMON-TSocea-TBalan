@@ -8,7 +8,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 function initMap(coordinates) {
     map.setView(coordinates, 15);
     var marker = L.marker(coordinates).addTo(map);
-  }
+}
 
 async function updateTicket(ticketid){
     let response = await fetch(`http://localhost:8081/api/tickets/updateTicket?ticketid=${ticketid}`, {method: 'PUT'});

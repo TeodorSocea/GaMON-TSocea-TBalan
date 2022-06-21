@@ -1,0 +1,68 @@
+#map {
+  height: 40%;
+}
+
+* {
+  text-align: center;
+}
+
+/* hide scrollbar but allow scrolling */
+.container {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+canvas {
+  margin: 20px;
+}
+
+#map {
+  margin: 20px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #5bc590;
+  display: block;
+  width: 80%;
+  font-size: 1.5rem;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#popup {
+  width: 35vh;
+  height: 25vh;
+  background-color: #ffffff;
+  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 5px 5px 25px;
+  z-index: 1001 !important;
+  transition: transform 0.1s, top, 0.1s;
+  visibility: hidden;
+}
+
+.openPopup {
+  visibility: visible !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+#statusImg {
+  width: 35%;
+  margin-top: -18%;
+}

@@ -105,4 +105,14 @@ controller.route("GET", "/api/tickets/solvedTickets", (req, res) => {
     });
 });
 
+controller.route("GET", "/api/tickets/tickets", (req, res) => {
+    db.getTicketsByLocationId(req.query.locationid, (err, results) => {
+        results = results.rows;
+        if(results.lenght === 0){
+            return res.json({}).end();
+        }
+        return res.json(results).end();
+    });
+});
+
 module.exports = controller;

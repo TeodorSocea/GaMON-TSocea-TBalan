@@ -9,8 +9,8 @@ const pool = new Pool({
 })
 
 exports.createTicket = async (ticket, callback) =>{
-    pool.query('insert into tickets(submitterid, locationid, paper, metal, glass, organic, comment) values ($1, $2, $3, $4, $5, $6, $7)', 
-    [ticket.submitterID, ticket.locationID, ticket.paper, ticket.metal, ticket.glass, ticket.organic, ticket.comment], 
+    pool.query('insert into tickets(submitterid, locationid, paper, plastic, metal, glass, organic, comment) values ($1, $2, $3, $4, $5, $6, $7, $8)', 
+    [ticket.submitterID, ticket.locationID, ticket.paper, ticket.plastic, ticket.metal, ticket.glass, ticket.organic, ticket.comment], 
     (err, results) => {
         console.log(err);
         console.log(results);
@@ -52,6 +52,15 @@ exports.getActiveTickets = async (callback) => {
         if (err)
             return callback(err);
         callback(null, results);   
+    });
+}
+
+exports.getTicketsByLocationId = async (locationid, callback) => {
+    pool.query('select * from tickets where locationid=$1 and active=\'true\'',
+    [locationid],
+    (err, results) => {
+        console.log(err);
+        callback(null, results);
     });
 }
 
