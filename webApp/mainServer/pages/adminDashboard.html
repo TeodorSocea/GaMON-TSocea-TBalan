@@ -9,15 +9,23 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
     <title>GaMON</title>
   </head>
-  <body onload="getTopTickets(6); ticketsChart()">
+  <body onload="getTopTickets(6); ticketsChart(); trashChart()">
     <div class="wrapper">
       <div class="container" id="ticketStatistics">
         <h2>Ticket Summary for the Past Week</h2>
         <canvas id="ticketsChart"></canvas>
+        <button type="button" onclick="ticketsList()" id="ticketsButton">
+          View Locations
+        </button>
       </div>
       <div class="container" id="trashStatistics">
+        <h2>Trash Summary</h2>
+        <canvas id="trashChart"></canvas>
         <button type="button" onclick="logout()" id="logoutButton">
           Logout
+        </button>
+        <button type="button" onclick="locationsList()" id="locationsButton">
+          View Locations
         </button>
       </div>
       <div class="container" id="tickets"></div>

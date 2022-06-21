@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="../addLocation.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
+    <script defer src="../addLocation.js"></script>
+    <title>GaMON</title>
+  </head>
+  <body onload="initMap()">
+    <div class="wrapper">
+      <div class="container">
+        <h1>Add new Location</h1>
+        <div id="map"></div>
+        <div>
+          <label for="locationName"><b>Location Name</b></label>
+          <input type="text" name="locationName" id="locationName" />
+          <div id="tags">
+            <div class="tag">
+              <label for="paper"><b>Paper</b></label>
+              <input type="checkbox" name="paper" id="paper" />
+            </div>
+            <div class="tag">
+              <label for="plastic"<b>Plastic</b></label>
+              <input type="checkbox" name="plastic" id="plastic" />
+            </div>
+            <div class="tag">
+              <label for="metal"><b>Metal</b></label>
+              <input type="checkbox" name="metal" id="metal" />
+            </div>
+            <div class="tag">
+              <label for="glass"><b>Glass</b></label>
+              <input type="checkbox" name="glass" id="glass" />
+            </div>
+            <div class="tag">
+              <label for="organic"><b>Organic</b></label>
+              <input type="checkbox" name="organic" id="organic" />
+            </div>
+          </div>
+        </div>
+        <button id="addLocation" onclick="addLocation()">Add Location</button>
+        <div id="popup">
+          <img id="statusImg" />
+          <h2 id="statusTitle"></h2>
+          <p id="statusMessage"></p>
+          <button type="button" id="statusButton">OK</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

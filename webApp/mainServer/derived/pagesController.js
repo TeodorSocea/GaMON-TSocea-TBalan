@@ -81,6 +81,32 @@ controller.route("GET", "/ticket", (req, res) => {
   );
 });
 
+controller.route("GET", "/locationsList", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  dynamicGeneratePage(
+    res,
+    path.join(pageUtils(".html"), "locations.html"),
+    [],
+    []
+  );
+})
+
+controller.route("GET", "/locationsList/addLocation", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  dynamicGeneratePage(
+    res,
+    path.join(pageUtils(".html"), "addLocation.html"),
+    [],
+    []
+  );
+});
+
 controller.route("GET", "*", (req, res) => {
   let ext = path.parse(req.url).ext.toLowerCase();
   if (ext === ".html") {

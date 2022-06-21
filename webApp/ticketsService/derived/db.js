@@ -33,7 +33,7 @@ exports.getIdFromUsername = async (username, callback) => {
 }
 
 exports.getTopTickets = async (top, callback) => {
-    pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where active=\'true\' ORDER BY datesubmitted DESC limit $1',
+    pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where active=\'true\' and datesolved is NULL ORDER BY datesubmitted DESC limit $1',
     [top], 
     (err, results) => {
         console.log(err);
@@ -44,8 +44,19 @@ exports.getTopTickets = async (top, callback) => {
     });
 }
 
-exports.getAllTickets = async (callback) => {
+exports.getActiveTickets = async (callback) => {
     pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where active=\'true\' ORDER BY datesubmitted DESC',
+    (err, results) => {
+        console.log(err);
+        console.log(results);
+        if (err)
+            return callback(err);
+        callback(null, results);   
+    });
+}
+
+exports.getSolvedTickets = async (callback) => {
+    pool.query('select id, submitterid, locationid, datesubmitted, datesolved, paper, plastic, metal, glass, organic, comment, active from tickets where active=\'true\' and datesolved is not NULL ORDER BY datesubmitted DESC',
     (err, results) => {
         console.log(err);
         console.log(results);
@@ -64,5 +75,22 @@ exports.getTicketById = async (ticketid, callback) => {
             return callback(err);
         }
         callback(null, results);
+    });
+}
+
+exports.solveTicket = async (ticketid, callback) => {
+    pool.query('update tickets set datesolved = now() where id=$1',
+    [ticketid],
+    (err, results) => {
+        console.log(err);
+        callback(results);  
+    });
+}
+
+exports.closeTicket = async (ticketid, callback) => {
+    pool.query('update tickets set active = \'false\' where id=$1',
+    [ticketid],
+    (err, results) => {
+        callback(results);  
     });
 }

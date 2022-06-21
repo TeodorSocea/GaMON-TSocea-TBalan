@@ -20,10 +20,11 @@ exports.getTicketsSubmittedBeforeDate = (date, callback) => {
 }
 
 exports.getTicketsSolvedOnDate = (date, callback) => {
-    pool.query('select  count(datesolved) from tickets where active=\'true\' and datesolved::timestamp::date = $1',
+    pool.query('select count(datesolved) from tickets where active=\'true\' and datesolved::timestamp::date = $1',
     [date], 
     (err, results) => {
-        console.log(err)
+        console.log(err);
+        console.log(date);
         if (err)
             return callback(err);
         callback(null, results, date);

@@ -60,9 +60,6 @@ const addRequestFunctionality = (req) => {
     }
 
     req.authorize = function(callback) {
-        console.log(this.method, this.url);
-        console.log(this.cookies);
-        console.log("this is the token", this.cookies.token);
         const token = this.cookies.token;
         if (token === undefined || !token || token === '')
         {
@@ -113,7 +110,7 @@ const server = http.createServer(function (req, res) {
 
     req.authorize((err, decoded) => {
         if (err) {
-            console.error(err);
+
             res.redirect('/').end();
             return;
         }
@@ -126,9 +123,10 @@ const server = http.createServer(function (req, res) {
         }).on('end', () => {
             try
             {
+                console.log("We out here");
                 if (req.method !== 'GET' && req.method !== 'DELETE' && body !== ''){
-                    console.log(body);
-                    req.body = JSON.parse(body);               
+                    req.body = JSON.parse(body);
+                    console.log(req.body);              
                 }
                 else
                     req.body = null;

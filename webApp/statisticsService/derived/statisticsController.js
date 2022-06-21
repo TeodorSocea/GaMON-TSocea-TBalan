@@ -52,6 +52,7 @@ controller.route("GET", "/ticketsChart", (req, res) => {
         daysClone.push(date);
         if(days.length == 0){
             console.log(ticketsSubmitted);
+            daysClone.reverse();
             db.getTicketsSolvedOnDate(daysClone.pop(), solve);
             return;
         }
@@ -60,18 +61,52 @@ controller.route("GET", "/ticketsChart", (req, res) => {
     db.getTicketsSubmittedBeforeDate(days.pop(), add);
 });
 
+controller.route("GET", "/trashChart", async (req, res) => {
+    let response = await fetch(`http://localhost:8081/api/tickets/solvedTickets`, {headers: {'Cookie': 'token=' + req.cookies.token}}).then(res => res.json());
+    
+    counts = {
+        'Paper': 0,
+        'Plastic': 0,
+        'Metal': 0,
+        'Glass': 0,
+        'Organic': 0
+    };
+
+    for(let i =0; i < response.length; i++){
+        counts.Paper += response[i].paper;
+        counts.Plastic += response[i].plastic;
+        counts.Metal += response[i].metal;
+        counts.Glass += response[i].glass;
+        counts.Organic += response[i].organic;
+    }
+    let chart = {
+        type: 'pie',
+        data: {
+            labels: Object.keys(counts),
+            datasets: [{
+                data: Object.values(counts),
+                backgroundColor: [
+                    '#ffc234',
+                    '#ff4069',
+                    '#059bff',
+                    '#808bfa',
+                    '#fe8a47'
+                ]
+            }]
+        }
+    }
+    console.log(counts);
+    res.json(chart).end();
+});
+
 controller.route("GET", "api/statistics/ticket" , async (req, res) => {
-    console.log(req.cookies.token);
-    console.log(req.query.ticketid);
     let ticket = await fetch(`http://localhost:8081/api/tickets/ticket?ticketid=${req.query.ticketid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
     let location = await fetch(`http://localhost:8081/api/locations/location?locationid=${ticket.locationid}`, { headers: {'Cookie' : 'token=' + req.cookies.token} }).then(res => res.json());
-    console.log(ticket);
-    console.log(location);
 
     let chart = {
         type: 'bar',
         data: {
-            labels: ['Paper,', 'Plastic', 'Metal', 'Glass', 'Oraganic'],
+            labels: ['Paper', 'Plastic', 'Metal', 'Glass', 'Oraganic'],
             datasets: [{
                 label: location.str,
                 data: [ticket.paper, ticket.plastic, ticket.metal, ticket.glass, ticket.organic],

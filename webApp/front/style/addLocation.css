@@ -49,19 +49,13 @@ select {
 
 label {
   font-weight: bold;
-  display: block;
   width: 80%;
   font-size: 1.2rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-input {
-  display: block;
+#locationName {
   width: 80%;
   font-size: 1.2rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 button {
@@ -79,15 +73,16 @@ button:hover {
   opacity: 0.8;
 }
 
-textarea {
-  width: 80%;
-  height: 12vh;
-}
-
-.tag {
-  width: 80%;
-}
-
-#trashTagSelector {
+#tags {
+  margin-top: 2vh;
   display: flex;
+  justify-content: space-around;
+}
+
+#tags input {
+  transform: scale(2);
+}
+
+#addLocation {
+  margin-top: 2vh;
 }

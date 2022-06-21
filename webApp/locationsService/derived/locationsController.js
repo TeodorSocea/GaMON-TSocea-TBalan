@@ -2,6 +2,7 @@ const Controller = require('../base/baseController.js');
 const { StatusCodes } = require('http-status-codes');
 const Mime = require('../base/httpTypes.js');
 const db = require('./db.js');
+const schemas = require('../schemas');
 var controller = new Controller();
 
 controller.route("GET", "/locations", (req, res) =>{
@@ -51,6 +52,31 @@ controller.route("GET", "/api/locations/location", (req, res) => {
         }
         results = results.rows[0];
         return res.json(results).end();
+    });
+});
+
+controller.route("GET", "/api/locations/allLocations", (req, res) => {
+    db.getAllLocations((err, results) => {
+        results = results.rows;
+        if(results.length === 0)
+            return res.json({}).end();
+        return res.json(results).end();
+    });
+});
+
+controller.route("POST", "/api/locations/addLocation", (req, res) => {
+    const {error, value} = schemas.locationSchema.validateLocation(req.body);
+    console.log(error);
+    if (error)
+        return res.status(StatusCodes.BAD_REQUEST).end(error.toString());
+    db.addLocation( value , (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(err.toString());
+        }
+        else {
+            res.end();
+        }
     });
 });
 

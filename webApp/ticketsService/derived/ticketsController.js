@@ -74,4 +74,35 @@ controller.route("GET", "api/tickets/ticket", (req, res) => {
     });
 });
 
+controller.route("PUT", "/api/tickets/updateTicket", (req, res) => {
+    db.getTicketById(req.query.ticketid, (err, results) => {
+        results = results.rows[0];
+        if(results){
+            if(results.datesolved){
+                db.closeTicket(req.query.ticketid, (results) =>{
+                    return res.end();
+                });
+            }else{
+                db.solveTicket(req.query.ticketid, (results) =>{
+                    return res.end();
+                });
+            }
+        }
+    });
+});
+
+controller.route("GET", "/api/tickets/activeTickets", (req, res) => {
+    db.getActiveTickets((err, results) => {
+        results = results.rows;
+        return res.json(results).end();
+    });
+});
+
+controller.route("GET", "/api/tickets/solvedTickets", (req, res) => {
+    db.getSolvedTickets((err, results) => {
+        results = results.rows;
+        return res.json(results).end();
+    });
+});
+
 module.exports = controller;

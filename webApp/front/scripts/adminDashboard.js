@@ -13,6 +13,10 @@ function viewTicket(ticketID){
     window.location.assign(`http://localhost:8081/ticket?ticketid=${ticketID}`);
 }
 
+function locationsList(){
+    window.location.assign('http://localhost:8081/locationsList');
+}
+
 function parseTickets(tickets){
     let output = [];
     for(let i = 0; i<tickets.length; i++){
@@ -60,6 +64,10 @@ async function ticketsChart(){
     let chart = document.getElementById('ticketsChart').getContext('2d');
     let response = await fetch(`http://localhost:8081/ticketsChart`).then(response => response.json());
     let ticketsChart = new Chart(chart, response);
-    console.log(response);
-    //let ticketsChart = new Chart(chart, chartData);
+}
+
+async function trashChart(){
+    let chart = document.getElementById('trashChart').getContext('2d');
+    let response = await fetch(`http://localhost:8081/trashChart`).then(response => response.json());
+    let trashChart = new Chart(chart, response);
 }

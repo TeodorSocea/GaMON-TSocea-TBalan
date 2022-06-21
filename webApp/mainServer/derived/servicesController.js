@@ -30,6 +30,14 @@ const services = [
         {
             method: "GET",
             path: "/api/locations/location"
+        },
+        {
+            method: "GET",
+            path: "/api/locations/allLocations"
+        },
+        {
+            method: "POST",
+            path: "/api/locations/addLocation"
         }
     ]
   },
@@ -46,11 +54,19 @@ const services = [
         },
         {
             method: "GET",
-            path: "/allTickets"
+            path: "api/tickets/ticket"
         },
         {
-            method: "GET",
-            path: "api/tickets/ticket"
+           method: "PUT",
+           path: "/api/tickets/updateTicket"
+        },
+        {
+           method: "GET",
+           path: "/api/tickets/activeTickets"
+        },
+        {
+          method: "GET",
+          path: "/api/tickets/solvedTickets"
         }
     ]
   },
@@ -60,6 +76,10 @@ const services = [
       {
         method: "GET",
         path: "ticketsChart"
+      },
+      {
+        method: "GET",
+        path: "trashChart"
       },
       {
         method: "GET",
