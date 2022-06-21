@@ -41,7 +41,7 @@ function openPopupSuccess(){
 
 function closePopupSuccess(){
     closePopup();
-    window.location.assign("/locationsList");
+    window.location.replace("/locationsList");
 }
 
 function closePopup(){

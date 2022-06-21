@@ -1,3 +1,16 @@
+function openPopupFailed(){
+  document.getElementById('statusImg').setAttribute("src", "crossmark.png"); 
+  document.getElementById('statusTitle').innerHTML = "Failed!";
+  document.getElementById('statusMessage').innerHTML = "Failed to authenticate!";
+  document.getElementById('popup').classList.add("openPopup");
+  document.getElementById('statusButton').setAttribute("onclick", "closePopup()");
+}
+
+function closePopup(){
+  document.getElementById("popup").classList.remove("openPopup");
+}
+
+
 async function doRegister() {
   let username = document.getElementById("registerUsername").value;
   let password = document.getElementById("registerPassword").value;
@@ -6,6 +19,8 @@ async function doRegister() {
 
   if (res === true) {
     window.location.assign("/");
+  } else {
+    openPopupFailed();
   }
 }
 
@@ -31,6 +46,8 @@ async function doLogin() {
 
   if (res === true) {
     window.location.assign("/");
+  }else{
+    openPopupFailed();
   }
 }
 

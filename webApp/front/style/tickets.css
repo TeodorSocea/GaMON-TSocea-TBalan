@@ -19,13 +19,13 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: auto 600px 600px auto;
+  grid-template-columns: auto 1200px auto;
   gap: 1.5vh;
   grid-template-areas:
-    ". . . ."
-    ". ticketStatistics trashStatistics ."
-    ". tickets tickets ."
-    ". . . .";
+    ". . ."
+    ". locations ."
+    ". locations ."
+    ". . .";
   grid-template-rows: 2vh 60vh 30vh 2vh;
 }
 
@@ -35,64 +35,43 @@ body {
   border-radius: 25px;
   box-shadow: 5px 5px 25px;
   text-align: center;
-}
-
-#ticketStatistics {
-  grid-area: ticketStatistics;
-}
-
-#trashStatistics {
-  grid-area: trashStatistics;
-}
-
-#tickets {
-  grid-area: tickets;
-  text-align: center;
-}
-
-/* hide scrollbar but allow scrolling */
-#tickets {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
-}
-
-#tickets::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
+  grid-area: locations;
 }
 
 @media only screen and (max-width: 1200px) {
   .wrapper {
-    grid-template-columns: auto 600px auto;
-    grid-template-areas:
-      ". . . "
-      ". ticketStatistics ."
-      ". trashStatistics ."
-      ". tickets ."
-      ". . .";
-    grid-template-rows: 2vh 60vh 60vh 60vh 2vh;
-  }
-  .ticket {
-    height: 12% !important;
+    grid-template-columns: auto 90vw auto;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .wrapper {
     grid-template-columns: auto 90vw auto;
-    grid-template-areas:
-      ". . . "
-      ". ticketStatistics ."
-      ". trashStatistics ."
-      ". tickets ."
-      ". . .";
-    grid-template-rows: 2vh 60vh 60vh 60vh 2vh;
   }
+}
+
+#buttons {
+  margin-top: 2vh;
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+  background-color: #5bc590;
+  display: block;
+  width: 80%;
+  font-size: 1.2rem;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 
 .ticket {
   background-color: #fa9a5b;
-  height: 18%;
+  height: 5vh;
   margin: 10px;
   border-radius: 10px;
   display: flex;
@@ -103,11 +82,19 @@ body {
   cursor: pointer;
 }
 
+.solved {
+  background-color: #6051cd !important;
+}
+
 .ticket:hover {
   opacity: 0.9;
 }
 
 .tags {
+  display: flex;
+}
+
+.info {
   display: flex;
 }
 
@@ -140,21 +127,14 @@ body {
   padding-right: 5px;
 }
 
-#trashChart {
-  margin: auto;
+/* hide scrollbar but allow scrolling */
+#tickets {
+  height: 60%;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
 }
 
-button {
-  cursor: pointer;
-  background-color: #5bc590;
-  display: block;
-  width: 80%;
-  font-size: 1.2rem;
-  margin: auto;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-}
-
-button:hover {
-  opacity: 0.8;
+#tickets::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }

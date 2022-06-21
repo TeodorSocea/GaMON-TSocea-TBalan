@@ -120,6 +120,19 @@ controller.route("GET", "/locationsList/location", (req, res) => {
   );
 });
 
+controller.route("GET", "/ticketsList", (req, res) => {
+  if(req.currentUser === undefined)
+    return res.redirect("/").end();
+  if(req.currentUser.isAdmin === 'false')
+    return res.redirect("/").end();
+  dynamicGeneratePage(
+      res,
+      path.join(pageUtils(".html"), "tickets.html"),
+      [],
+      []
+  );
+});
+
 controller.route("GET", "*", (req, res) => {
   let ext = path.parse(req.url).ext.toLowerCase();
   if (ext === ".html") {

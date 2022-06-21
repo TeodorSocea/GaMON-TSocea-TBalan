@@ -43,7 +43,7 @@ function openPopupSuccess(){
 
 function closePopupSuccess(){
     closePopup();
-    window.location.assign("/adminDashboard");
+    window.location.replace("/adminDashboard");
 }
 
 function closePopup(){

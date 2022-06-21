@@ -17,6 +17,14 @@ function locationsList(){
     window.location.assign('http://localhost:8081/locationsList');
 }
 
+function ticketsList(){
+    window.location.assign('http://localhost:8081/ticketsList');
+}
+
+function citizenDashboard(){
+    window.location.assign('http://localhost:8081/citizenDashboard')
+}
+
 function parseTickets(tickets){
     let output = [];
     for(let i = 0; i<tickets.length; i++){

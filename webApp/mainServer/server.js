@@ -26,7 +26,9 @@ function shouldSkipAuthorization(req)
             '/documentation',
             '/base.css',
             '/landing.css',
-            '/landing.js'
+            '/landing.js',
+            '/checkmark.png',
+            '/crossmark.png'
         ]
     }
     if (!publicAvailablePaths[req.method])

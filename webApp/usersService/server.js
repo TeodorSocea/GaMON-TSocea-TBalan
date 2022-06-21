@@ -129,7 +129,6 @@ const server = http.createServer(function (req, res) {
                 for(let i = 0; i < controllers.length; ++i) {
                     let controller = controllers[i];
                     if(controller.match(req)) {
-                        console.log("handling");
                         controller.handle(req, res);
                         break;
                     }

@@ -79,6 +79,10 @@ const services = [
         {
           method: "GET",
           path: "/api/tickets/tickets"
+        },
+        {
+          method: "GET",
+          path: "/api/tickets/export"
         }
     ]
   },
@@ -132,7 +136,6 @@ for (let service of services) {
 
         const response = await fetch(url, fetchRequest);
         const responseBody = await response.text();
-        console.log("Got a token", JSON.parse(responseBody).token);
         if (response.ok) {
           console.log(responseBody);
           res.setHeader(
@@ -186,7 +189,7 @@ for (let service of services) {
             if (contentType){
               res.setHeader('Content-Type', contentType + ";charset=\"utf-8\"");
               if(contentType === 'application/octet-stream');
-              res.setHeader('Content-Disposition', 'attachement; filename=locations.csv');
+                res.setHeader('Content-Disposition', response.headers.get('Content-Disposition'));
             }
             else
               res.setHeader('Content-Type', "text/plain;charset=\"utf-8\"");

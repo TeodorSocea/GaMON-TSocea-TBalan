@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 const Mime = require('../base/httpTypes.js');
 const schemas = require('../schemas');
 const db = require('./db.js');
+const CsvParser = require("json2csv").Parser;
 var controller = new Controller();
 
 controller.route("POST", "/ticketSubmit", (req, res) => {
@@ -112,6 +113,23 @@ controller.route("GET", "/api/tickets/tickets", (req, res) => {
             return res.json({}).end();
         }
         return res.json(results).end();
+    });
+});
+
+controller.route("GET", "/api/tickets/export", (req, res) => {
+    db.getActiveTickets((err, results) => {
+        results = results.rows;
+        if(req.query.format === 'json'){
+            res.setHeader("Content-Type", "application/octet-stream");
+            res.setHeader("Content-Disposition", "attachment; filename=tickets.json");
+            return res.status(200).end(JSON.stringify(results));
+        }else if(req.query.format === 'csv'){
+            const csvParser = new CsvParser();
+            const csvData = csvParser.parse(results);
+            res.setHeader("Content-Type", "application/octet-stream");
+            res.setHeader("Content-Disposition", "attachment; filename=tickets.csv");
+            return res.status(200).end(csvData);
+        }
     });
 });
 

@@ -1,8 +1,8 @@
 const joi = require('joi');
 
 const schema = joi.object({
-    username: joi.string().required(),
-    password: joi.string().required(),
+    username: joi.string().alphanum().min(3).max(30).required(),
+    password: joi.string().alphanum().min(3).max(30).required(),
     isAdmin: joi.string().default('false'),
     active: joi.string().default('true'),
 });

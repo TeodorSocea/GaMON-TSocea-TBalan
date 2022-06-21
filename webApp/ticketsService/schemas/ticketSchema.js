@@ -10,7 +10,7 @@ const schema = joi.object({
     metal: joi.number().default(0),
     glass: joi.number().default(0),
     organic: joi.number().default(0),
-    comment: joi.string(),
+    comment: joi.string().alphanum(),
     active: joi.string().default('true')
 });
 

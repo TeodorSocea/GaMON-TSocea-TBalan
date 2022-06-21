@@ -1,7 +1,7 @@
 const joi = require('joi');
 
 const schema = joi.object({
-    str: joi.string().required(),
+    str: joi.string().required().alphanum(),
     lat: joi.number().required(),
     long: joi.number().required(),
     tags: joi.array().items(joi.string()).required(),
